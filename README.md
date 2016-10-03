@@ -1,1 +1,3 @@
-# bodytracker
+bodytracker
+
+Track your body measures

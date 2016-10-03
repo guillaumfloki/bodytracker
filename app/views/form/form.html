@@ -1,0 +1,58 @@
+<p>This is the partial for form view.</p>
+<div class="row">
+    <div class="medium-6 columns">
+        <h1>Retrieve user</h1>
+        <form novalidate ng-submit="getUser(user2get)">
+            <input type="text" placeholder="What user id ?" ng-model="user2get.id">
+            <input type="reset" ng-click="reset(userList)" value="Reset">
+            <input type="submit" value="Get user">
+        </form>
+        <p ng-show="userList">{{userList.firstname}} {{userList.lastname}}</p>
+        <hr>
+        <h1 class="title">Sign in</h1>
+        <form novalidate ng-submit="addUser(userForm)">
+            <div class="row">
+                <div class="medium-6 columns">
+                    <label for="">
+                        <input type="text" ng-model="userForm.lastname" placeholder="Last ng-model">
+                    </label>
+                </div>
+                <div class="medium-6 columns">
+                    <label for="">
+                        <input type="text" ng-model="userForm.firstname" placeholder="First ng-model">
+                    </label>
+                </div>
+            </div>
+            <label for="">
+                <input type="number" ng-model="userForm.age" placeholder="Age">
+            </label>
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="radio" ng-model="userForm.gender" value="m" placeholder="Gender">Male</label>
+            </div>
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="radio" ng-model="userForm.ender" value="m" placeholder="Gender">Female</label>
+            </div>
+            <label for="">
+                <input type="text" ng-model="userForm.username" placeholder="Username">
+            </label>
+            <label for="">
+                <input type="password" ng-model="userForm.pwd" placeholder="Password">
+            </label>
+            <label for="">
+                <input type="password" ng-model="userForm.pwd2" placeholder="Confirmation">
+            </label>
+            <label for="">
+                <input type="number" ng-model="userForm.height" placeholder="Height (cm)">
+            </label>
+            <label for="">
+                <input type="number" ng-model="userForm.weight" placeholder="Weight (kg)">
+            </label>
+            <input type="button" ng-click="reset()" value="Reset">
+            <input type="submit" value="Save">
+        </form>
+        <pre>user = {{userForm | json}}</pre>
+        <h2>Statut enregistrement utilisateur: {{addUserResult}}</h2>
+    </div>
+</div>
