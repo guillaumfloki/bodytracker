@@ -1,10 +1,12 @@
 (function() {
+    /*constants declaration*/
     const DIR_PATH = "directives/";
     const SERVICES_PATH = "services/";
     const FILTERS_PATH = "filters/";
     const CTRL_PATH = "controllers/";
     const PAGE_PATH = "views/";
-    var FILE_PATHS = [
+	/*array containing all filepaths*/
+	var FILE_PATHS = [
         CTRL_PATH + "appController.js",
         SERVICES_PATH + "mainService.js",
         DIR_PATH + "color/colorDirective.js",
@@ -14,9 +16,10 @@
 
         PAGE_PATH + "stats/stats.js",
         PAGE_PATH + "form/form.js",
-
+        PAGE_PATH + "login/login.js",
     ];
-    angular.forEach(FILE_PATHS, function(filePath, index) {
+    /*document.body.appendChild() doesn't seem to work well: use document.write instead*/
+     FILE_PATHS.forEach(function(filePath) {
         document.write("<script src='" + filePath + "'></script>");
     });
 })();

@@ -6,7 +6,7 @@ var destination = basePath + "/dist";
 
 //tasks
 gulp.task('css', function () {
-    return gulp.src(source + "/style/sass/*.scss")
+    return gulp.src(source + "/sass/*.scss")
         .pipe(plugins.sass().on('error', plugins.sass.logError))
         .pipe(plugins.csscomb())
         .pipe(plugins.cssbeautify({indent: "    "}))
