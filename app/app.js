@@ -12,4 +12,9 @@ config(['$locationProvider', '$routeProvider', '$stateProvider', function($locat
     $locationProvider.hashPrefix('!');
 
     $routeProvider.otherwise({ redirectTo: '/form' });
-}]);
+}])
+    .controller('CommonCtrl', function($scope, $rootScope){
+        $scope.distPath = "dist/";
+        $scope.distCssPath = $scope.distPath + 'css/';
+        $scope.distCssFilePath = $scope.distCssPath  + 'screen.css';
+    })
