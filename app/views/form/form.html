@@ -1,6 +1,8 @@
-<p>This is the partial for form view.</p>
+
 <div class="row">
     <div class="medium-6 columns">
+        <h1>Enter your body measures</h1>
+        <hr>
         <h1>Retrieve user</h1>
         <form novalidate ng-submit="getUser(user2get)">
             <input type="text" placeholder="What user id ?" ng-model="user2get.id">
@@ -14,12 +16,12 @@
             <div class="row">
                 <div class="medium-6 columns">
                     <label for="">
-                        <input type="text" ng-model="userForm.lastname" placeholder="Last ng-model">
+                        <input type="text" ng-model="userForm.lastname" placeholder="Lastname">
                     </label>
                 </div>
                 <div class="medium-6 columns">
                     <label for="">
-                        <input type="text" ng-model="userForm.firstname" placeholder="First ng-model">
+                        <input type="text" ng-model="userForm.firstname" placeholder="Firstname">
                     </label>
                 </div>
             </div>

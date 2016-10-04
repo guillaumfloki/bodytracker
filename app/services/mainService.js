@@ -15,10 +15,14 @@ app.factory("userService", ["$http", function($http) {
     var update = function(user) {
         return $http.post(BACK_PATH + 'modules/user/user_update.php');
     }
+    var login = function(user) {
+        return $http.post(BACK_PATH + 'modules/user/user_login.php');
+    }
     return {
         getUser: get,
         addUser: add,
         updateUser: update,
         toggleStatus: toggleStatus,
+        loginUser: login,
     };
 }])

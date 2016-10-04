@@ -1,14 +1,6 @@
 'use strict';
 
 angular.module('btApp.form', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/form', {
-        templateUrl: 'views/form/form.html',
-        controller: 'formCtrl'
-    });
-}])
-
 .controller('formCtrl', ["$scope", "$route", "$state", "userService", "$http",
     function($scope, $route, $state, userService, $http) {
         $scope.reset = function(obj) {

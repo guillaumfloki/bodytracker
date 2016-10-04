@@ -1,15 +1,30 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('btApp', [
+var app = angular.module('btApp', [
     'ngRoute',
+	'ui.router',
     'btApp.form',
     'btApp.stats',
+    'btApp.login',
     'btApp.version',
-    'ui.router',
-]).
-config(['$locationProvider', '$routeProvider', '$stateProvider', function($locationProvider, $routeProvider, $stateProvider) {
+    'btApp.charts',
+]);
+	app.config(['$locationProvider', '$routeProvider', '$stateProvider', function($locationProvider, $routeProvider, $stateProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({ redirectTo: '/form' });
-}])
+    $routeProvider
+        .when('/login', {
+        templateUrl: 'views/login/login.html',
+        controller: 'loginCtrl'
+    	})
+        .when('/form', {
+            templateUrl: 'views/form/form.html',
+            controller: 'formCtrl'
+        })
+        .when('/stats', {
+            templateUrl: 'views/stats/stats.html',
+            controller: 'statsCtrl'
+        })
+        .otherwise({ redirectTo: '/login' });
+}]);

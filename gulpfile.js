@@ -15,3 +15,4 @@ gulp.task('css', function () {
         .pipe(gulp.dest(destination + "/css"));
 });
 gulp.task('build', ['css']);
+gulp.task('default', ['build']);
