@@ -33,7 +33,11 @@ app.factory("measureService", ["$http", function($http) {
 		return $http.post(BACK_PATH + "modules/measures/measures_add.php", item);
 	};
 
+	var getWeightStats = function(userId){
+		return $http.get(BACK_PATH + "modules/measures/measures_weight.php?id="+userId);
+	}
 	return {
 		addMeasures: add,
+		getWeightStats: getWeightStats,
 	};
 }]);

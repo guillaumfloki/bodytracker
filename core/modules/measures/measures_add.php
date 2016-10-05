@@ -6,7 +6,7 @@ foreach ($request as $key => $value) {
     ${$key} = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 $datetime = date2TS($datetime);
-$q = $mysqli->query("INSERT INTO body_measures (id, id_user, date, neck, chest, shoulders, arm_right, arm_left, calf_right, calf_left, thigh_right, thigh_left, waist, image) VALUES ('', '$id_user', '$datetime', '$neck', '$chest', '$shoulders', '$arm_right', '$arm_left', '$calf_right', '$calf_left', '$thigh_right', '$thigh_left', '$waist', '$image')");
+$q = $mysqli->query("INSERT INTO body_measures (id, id_user, date, weight, neck, chest, shoulders, arm_right, arm_left, calf_right, calf_left, thigh_right, thigh_left, waist, image) VALUES ('', '$id_user', '$datetime', '$weight', '$neck', '$chest', '$shoulders', '$arm_right', '$arm_left', '$calf_right', '$calf_left', '$thigh_right', '$thigh_left', '$waist', '$image')");
 $r = "0";
 if ($q) {
     $r = "1";

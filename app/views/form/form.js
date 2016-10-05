@@ -9,7 +9,7 @@ angular.module('btApp.form', ['ngRoute'])
 			if ($scope.isAuthenticated()) {
 				$scope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 			}
-			$scope.addMeasures = function (measures) {
+			$scope.addMeasures = function(measures) {
 				if (measures) {
 					if (!measures.id_user) {
 						measures.id_user = $scope.currentUser.id;

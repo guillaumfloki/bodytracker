@@ -4,9 +4,11 @@
 			<h1>Welcome back {{currentUser.firstname}} !</h1>
 			<hr>
 			<h2>Add new body measures</h2>
+			<h6>(metric values)</h6>
 			<form novalidate ng-submit="addMeasures(measures)">
 				<input type="hidden" value="{{currentUser.id}}" ng-model="measures.id_user">
 				<input type="datetime" placeholder="Date" ng-model="measures.datetime" required>
+				<input type="number" placeholder="Weight" ng-model="measures.weight" required>
 				<input type="number" placeholder="Neck" ng-model="measures.neck" required>
 				<input type="number" placeholder="Chest" ng-model="measures.chest" required>
 				<input type="number" placeholder="Shoulders" ng-model="measures.shoulders" required>
