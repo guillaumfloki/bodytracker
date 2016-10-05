@@ -10,7 +10,6 @@ chartApp.controller('LineCtrl', function ($scope, measureService) {
 	$scope.getWeightStats = function (id) {
 		measureService.getWeightStats(id).success(function (data) {
 			$scope.labels = data[0];
-			console.log(data[0]);
 			$scope.weightData = data[1];
 			$scope.series = ['Weight'];
 			$scope.colors = ['#ff8e72'];

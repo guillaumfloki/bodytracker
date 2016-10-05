@@ -37,7 +37,7 @@
             </ul>
             <ul class="right">
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
-                <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="button warning">Sign up</a></li>
+                <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="warning">Sign up</a></li>
                 <li><a ng-click="logout()" ng-if="isAuthenticated()" class=""button><span class="fa fa-sign-out"></span></a></li>
             </ul>
         </section>
@@ -46,7 +46,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
     <div ng-view></div>
-    <footer class="medium-12 columns bt-footer"><p blush class="right">BodyTracker app: v<span app-version></span></p></footer>
+    <footer class="medium-12 columns bt-footer"><p blush class="left">BodyTracker app: v<span app-version></span></p></footer>
     <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->

@@ -28,7 +28,8 @@ angular.module('btApp').controller('CommonCtrl', ["$scope", "$rootScope", "$loca
 	};
 	$scope.signin = function(user){
 		if(user){
-			userService.loginUser(user).success(function(data){
+			userService.signinUser(user).success(function(data){
+				localStorage.removeItem('currentUser');
 				localStorage.setItem('currentUser', JSON.stringify(data));
 				$scope.currentUser = data;
 				$location.url('/form');
@@ -43,7 +44,10 @@ angular.module('btApp').controller('CommonCtrl', ["$scope", "$rootScope", "$loca
 				.success(function(data) {
 					$scope.addUserResult = (data.length > 0) ? 'OK' : 'KO';
 					$scope.reset($scope.userForm);
+					localStorage.removeItem('currentUser');
 					localStorage.setItem('currentUser', JSON.stringify(data));
+					$scope.currentUser = data;
+					$location.url('/form');
 				}).error(function(data) {
 				console.log(data.error);
 			});

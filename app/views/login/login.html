@@ -3,10 +3,10 @@
 	<div class="row">
 		<div class="medium-6 columns">
 			<form novalidate ng-submit="signin(userLogin)">
-				<input type="text" ng-model="userLogin.username" placeholder="Username"><br>
+				<input type="text" ng-model="userLogin.username" placeholder="Username">
 				<input type="password" ng-model="userLogin.password" placeholder="Password">
-				<input type="reset" value="Reset" ng-click="resetForm('userLogin')">
-				<input type="submit" value="Sign in">
+				<input type="reset" value="Cancel" ng-click="resetForm('userLogin')" class="button secondary">
+				<input type="submit" value="Sign in" class="button">
 			</form>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 		<label for="">
 			<input type="number" ng-model="userForm.weight" placeholder="Weight (kg)">
 		</label>
-		<input type="button" ng-click="reset('userForm')" value="Reset">
-		<input type="submit" value="Save">
+		<input type="button" ng-click="resetForm('userForm')" value="Cancel" class="button secondary">
+		<input type="submit" value="Save" class="button">
 	</form>
 </div>
