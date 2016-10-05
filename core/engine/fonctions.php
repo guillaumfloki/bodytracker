@@ -81,18 +81,18 @@ function charge_fichier($fichier){
 
 //formatage TimeStamp d'une date lisible
 function date2TS($date, $full=false){
+    $d='';
 	if($date != '' && $date != '0000/00/00'){
 		$e = explode("/",$date);
 		if(isset($full) && $full==true){
 			$t = explode(":",$e[1]);
 			$time = $t[0].",".$t[1].",".$t[2];
-			return $date = mktime($time,$e[1], $e[0], $e[2]);
+            $d = mktime($time,$e[1], $e[0], $e[2]);
 		}else{
-			return $date = mktime(0,0,0,$e[1], $e[0], $e[2]);
+            $d = mktime(0,0,0,$e[1], $e[0], $e[2]);
 		}		
-	}else{
-		return $date = '';
 	}
+	return $d;
 }
 //formatage lisible d'un timestamp (arg. opt. pour les heures, mn, etc.)
 function ts2date($ts, $full=false){

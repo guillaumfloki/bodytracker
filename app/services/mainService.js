@@ -26,4 +26,14 @@ app.factory("userService", ["$http", function($http) {
         toggleStatus: toggleStatus,
         loginUser: login,
     };
-}])
+}]);
+app.factory("measureService", ["$http", function($http) {
+	const BACK_PATH = "http://bodytracker.dev/core/";
+	var add = function(item) {
+		return $http.post(BACK_PATH + "modules/measures/measures_add.php", item);
+	};
+
+	return {
+		addMeasures: add,
+	};
+}]);

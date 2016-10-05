@@ -15,6 +15,7 @@ angular.module('btApp').controller('CommonCtrl', ["$scope", "$rootScope", "$loca
 		var bool = false;
 		if(localStorage.getItem('currentUser')){
 			bool = true;
+			$scope.currentUser = JSON.parse(localStorage.getItem('currentUser'));
 		}
 		return bool;
 	};

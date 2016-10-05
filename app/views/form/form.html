@@ -1,16 +1,28 @@
 <div class="main" ng-init="initView()">
-<div class="row">
-    <div class="medium-12 columns">
-        <h1>Welcome back {{currentUser.firstname}} !</h1>
-        <hr>
-        <h1>Retrieve user</h1>
-        <form novalidate ng-submit="getUser(user2get)">
-            <input type="text" placeholder="What user id ?" ng-model="user2get.id">
-            <input type="reset" ng-click="reset('userList')" value="Reset">
-            <input type="submit" value="Get user">
-        </form>
-        <p ng-show="userList">{{userList.firstname}} {{userList.lastname}}</p>
-        <hr>
-    </div>
-</div>
+	<div class="row">
+		<div class="medium-12 columns">
+			<h1>Welcome back {{currentUser.firstname}} !</h1>
+			<hr>
+			<h2>Add new body measures</h2>
+			<form novalidate ng-submit="addMeasures(measures)">
+				<input type="hidden" value="{{currentUser.id}}" ng-model="measures.id_user">
+				<input type="datetime" placeholder="Date" ng-model="measures.datetime" required>
+				<input type="number" placeholder="Neck" ng-model="measures.neck" required>
+				<input type="number" placeholder="Chest" ng-model="measures.chest" required>
+				<input type="number" placeholder="Shoulders" ng-model="measures.shoulders" required>
+				<input type="number" placeholder="Right arm" ng-model="measures.arm_right" required>
+				<input type="number" placeholder="Left arm" ng-model="measures.arm_left" required>
+				<input type="number" placeholder="Right calf" ng-model="measures.calf_right" required>
+				<input type="number" placeholder="Left calf" ng-model="measures.calf_left" required>
+				<input type="number" placeholder="Right thigh" ng-model="measures.thigh_right" required>
+				<input type="number" placeholder="Left thigh" ng-model="measures.thigh_left" required>
+				<input type="number" placeholder="Waist" ng-model="measures.waist" required>
+				<input type="file" ng-model="measures.image">
+				<div class="button-group right">
+					<input type="reset" ng-click="reset('measures')" value="Reset" class="button secondary">
+					<input type="submit" value="Add measures" class="button success">
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

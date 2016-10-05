@@ -8,6 +8,4 @@ angular.module('btApp.login', ['ngRoute'])
 			$scope[obj] = {};
 		}
 	};
-
-
 }]);
