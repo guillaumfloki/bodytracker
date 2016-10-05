@@ -26,7 +26,6 @@
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="bower_components/chart.js/dist/Chart.min.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
-
 </head>
 
 <body>
@@ -35,6 +34,11 @@
             <ul class="left">
                 <li ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a href="#!/form">form</a></li>
                 <li><a href="#!/stats">Stats</a></li>
+            </ul>
+            <ul class="right">
+                <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
+                <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="button warning">Sign up</a></li>
+                <li><a ng-click="logout()" ng-if="isAuthenticated()" class=""button>Log out</a></li>
             </ul>
         </section>
     </nav>

@@ -1,26 +1,27 @@
 var app = angular.module('btApp');
 app.factory("userService", ["$http", function($http) {
-    const BACK_PATH = "http://body_tracking.dev/core/";
+    const BACK_PATH = "http://bodytracker.dev/core/";
     var get = function(user) {
         return $http.post(BACK_PATH + "modules/user/user_list.php", { id: user.id });
     };
 
-    var add = function(user) {
+    var signup = function(user) {
         return $http.post(BACK_PATH + "modules/user/user_signin.php", user);
     };
 
-    var toggleStatus = function(userId, status) {
-        return $http.post(BACK_PATH + 'modules/user/user_remove.php', {id: userId, status: status});
+    var toggleStatus = function(id, status) {
+        return $http.post(BACK_PATH + 'modules/user/user_remove.php', {id: id, status: status});
     };
-    var update = function(user) {
+    var update = function(id) {
         return $http.post(BACK_PATH + 'modules/user/user_update.php');
     }
     var login = function(user) {
-        return $http.post(BACK_PATH + 'modules/user/user_login.php');
+        return $http.post(BACK_PATH + 'modules/user/user_login.php', user);
     }
+
     return {
         getUser: get,
-        addUser: add,
+        signupUser: signup,
         updateUser: update,
         toggleStatus: toggleStatus,
         loginUser: login,

@@ -13,9 +13,11 @@ $weight = $request->weight;
 //insert
 $p = newPassword($pwd2);
 $s = query("INSERT INTO user (lastname, firstname, age, username, password, gender, height, weight) VALUES ('$lastname', '$firstname', '$age', '$username', '$p', '$gender', '$height', '$weight')");
+$id = $mysqli->insert_id;
 $r = 'KO';
 if($s){
 	$r = json_encode($request);
+    $r[] = $id;
 }
 echo $r;
 ?>

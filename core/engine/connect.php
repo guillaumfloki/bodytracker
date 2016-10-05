@@ -9,7 +9,7 @@ switch(SERVER){
 	break;
 	case "local":
 	$server = "localhost";
-	$database = "body_tracking";
+	$database = "bodytracker";
 	$user = "root";
 	$password = "";
 	break;

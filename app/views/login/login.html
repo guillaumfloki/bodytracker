@@ -1,7 +1,8 @@
+<div class="signin" ng-show="defaultPanel == '1'">
 <h1>Sign in</h1>
 <div class="row">
 	<div class="medium-6 columns">
-<form novalidate ng-submit="login(userLogin)">
+<form novalidate ng-submit="signin(userLogin)">
 	<input type="text" ng-model="userLogin.username" placeholder="Username"><br>
 	<input type="password" ng-model="userLogin.password" placeholder="Password">
 	<input type="reset" value="Reset" ng-click="resetForm('userLogin')">
@@ -9,4 +10,49 @@
 </form>
 	</div>
 </div>
-<pre>userLogin: <br>{{userLogin}}</pre>
+</div>
+<div class="signup" ng-show="defaultPanel == '2'">
+<h1 class="title">Sign up</h1>
+<form novalidate ng-submit="signup(userForm)">
+	<div class="row">
+		<div class="medium-6 columns">
+			<label for="">
+				<input type="text" ng-model="userForm.lastname" placeholder="Lastname">
+			</label>
+		</div>
+		<div class="medium-6 columns">
+			<label for="">
+				<input type="text" ng-model="userForm.firstname" placeholder="Firstname">
+			</label>
+		</div>
+	</div>
+	<label for="">
+		<input type="number" ng-model="userForm.age" placeholder="Age">
+	</label>
+	<div class="medium-6 columns">
+		<label for="">
+			<input type="radio" ng-model="userForm.gender" value="m" placeholder="Gender">Male</label>
+	</div>
+	<div class="medium-6 columns">
+		<label for="">
+			<input type="radio" ng-model="userForm.ender" value="m" placeholder="Gender">Female</label>
+	</div>
+	<label for="">
+		<input type="text" ng-model="userForm.username" placeholder="Username">
+	</label>
+	<label for="">
+		<input type="password" ng-model="userForm.pwd" placeholder="Password">
+	</label>
+	<label for="">
+		<input type="password" ng-model="userForm.pwd2" placeholder="Confirmation">
+	</label>
+	<label for="">
+		<input type="number" ng-model="userForm.height" placeholder="Height (cm)">
+	</label>
+	<label for="">
+		<input type="number" ng-model="userForm.weight" placeholder="Weight (kg)">
+	</label>
+	<input type="button" ng-click="reset('userForm')" value="Reset">
+	<input type="submit" value="Save">
+</form>
+</div>

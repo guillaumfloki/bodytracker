@@ -27,4 +27,5 @@ var app = angular.module('btApp', [
             controller: 'statsCtrl'
         })
         .otherwise({ redirectTo: '/login' });
+
 }]);
