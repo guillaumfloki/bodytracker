@@ -32,8 +32,8 @@
     <nav class="top-bar" data-topbar role="navigation">
         <section class="top-bar-section">
             <ul class="left">
-                <li ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a href="#!/form"><span class="fa fa-check-square-o"></span>&nbsp;Form</a></li>
-                <li><a href="#!/stats"><span class="fa fa-bar-chart"></span>&nbsp;Stats</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a href="#!/form"><span class="fa fa-check-square-o"></span>&nbsp;Form</a></li>
+                <li ng-if="isAuthenticated()"><a href="#!/stats"><span class="fa fa-bar-chart"></span>&nbsp;Stats</a></li>
             </ul>
             <ul class="right">
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
