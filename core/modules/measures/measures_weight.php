@@ -17,6 +17,7 @@ if (mysqli_num_rows($res) > 0) {
     $a[] = $dateArr;
     $a[] = $weightArr;
 }
+mysqli_free_result($res);
 $arr = json_encode($a);
 echo $arr;
 logout();
