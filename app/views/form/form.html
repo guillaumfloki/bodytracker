@@ -1,11 +1,13 @@
 <div class="main" ng-init="initView()">
+	<div class="form-result" ng-show="result.bool==true">
+		<p class="{{result.class}}"><span class="fa fa-{{result.sign}}"></span>&nbsp;<span ng-bind="result.text"></span></p>
+	</div>
 	<div class="row">
 		<div class="medium-12 columns">
 			<div class="medium-12 columns">
 				<h1>Welcome back {{currentUser.firstname | capitalize}} !</h1>
 				<hr>
-				<h2>Add new body measures</h2>
-				<h6>(metric values)</h6>
+				<h2>Add new body measures (metric values)</h2>
 			</div>
 			<form novalidate ng-submit="addMeasures(measures)">
 				<input type="hidden" value="{{currentUser.id}}" ng-model="measures.id_user">
@@ -40,7 +42,7 @@
 				<div class="medium-6 columns"><input type="number" placeholder="Waist" ng-model="measures.waist"
 													 required></div>
 
-				<div class="medium-6 columns"><input type="file" ng-model="measures.image"></div>
+				<div class="medium-6 columns" hidden><input type="file" ng-model="measures.image"></div>
 
 				<div class="medium-12 columns">
 					<div class="button-group right">
