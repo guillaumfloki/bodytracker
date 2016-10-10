@@ -17,10 +17,11 @@
         DIR_PATH + "color/color.directive.js",
         DIR_PATH + "version/version.js",
         DIR_PATH + "version/version.directive.js",
+        DIR_PATH + "chartAltLine/chartAltLine.directive.js",
 
         FILTERS_PATH + "filters.js",
 
-        PAGE_PATH + "stats/stat_charts.js",
+        PAGE_PATH + "stats/stat_charts.js"
 
     ];
     /*document.body.appendChild() doesn't seem to work well: use document.write instead*/

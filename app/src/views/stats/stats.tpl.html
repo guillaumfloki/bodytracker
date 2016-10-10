@@ -3,23 +3,80 @@
 		<h1 ng-bind="weightTitle"></h1>
 		<div class="medium-12 columns">
 			<div class="medium-6 columns">
-				<canvas id="line" class="chart chart-line" chart-data="weightData"
-						chart-labels="labels" chart-series="series" chart-options="options"
-						chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
-				</canvas>
+				<label for="weightLine">Weight <br>
+					<canvas id="weightLine" class="chart chart-line" chart-data="statsData.weight"
+							chart-labels="labels" chart-series="series['Weight']" chart-options="weightOptions"
+							chart-dataset-override="datasetOverride" chart-click="pointData" chart-colors="weightColors"
+							data-bmi="{{statsUser.bmi}}"></canvas>
+				</label>
 			</div>
-			<div class="medium-6 columns">
-				<canvas id="line" class="chart chart-line" chart-data="weightData"
-						chart-labels="labels" chart-series="series" chart-options="options"
-						chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
-				</canvas>
+			<div class="medium-6 columns"><label for="bmiLine">BMI <br>
+				<canvas id="bmiLine" class="chart chart-line" chart-data="bmiData"
+						chart-labels="bmiLabels" chart-series="series['BMI']" chart-options="options"
+						chart-dataset-override="datasetOverride" chart-click="pointData"
+						chart-colors="bmiColors"></canvas>
+			</label>
 			</div>
 		</div>
-		<div class="row">
-			<div class="medium-3 columns"></div>
-			<div class="medium-3 columns"></div>
-			<div class="medium-3 columns"></div>
-			<div class="medium-3 columns"></div>
+		<div class="medium-12 columns">
+			<div class="medium-3 columns">
+				<label for="bmiLine">Neck <br>
+					<canvas id="neckLine" class="chart chart-line" chart-data="statsData.neck"
+							chart-labels="labels" chart-series="series['Neck']" chart-options="options"
+							chart-dataset-override="datasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+			<div class="medium-3 columns">
+				<label for="bmiLine">Waist <br>
+					<canvas id="waistLine" class="chart chart-line" chart-data="statsData.waist"
+							chart-labels="labels" chart-series="series['Waist']" chart-options="options"
+							chart-dataset-override="datasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+			<div class="medium-3 columns">
+				<label for="chestLine">Chest <br>
+					<canvas id="chestLine" class="chart chart-line" chart-data="statsData.chest"
+							chart-labels="labels" chart-series="series['Chest']" chart-options="options"
+							chart-dataset-override="datasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+			<div class="medium-3 columns">
+				<label for="shouldersLine">Shoulders <br>
+					<canvas id="shouldersLine" class="chart chart-line" chart-data="statsData.shoulders"
+							chart-labels="labels" chart-series="series['Shoulders']" chart-options="options"
+							chart-dataset-override="datasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+		</div>
+		<div class="medium-12 columns">
+			<div class="medium-4 columns">
+				<label for="armsLine">Arms <br>
+					<canvas id="armsLine" class="chart chart-line" chart-data="statsData.arms[0]"
+							chart-labels="labels" chart-series="series[6]" chart-options="options"
+							chart-dataset-override="datasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+			<div class="medium-4 columns">
+				<label for="calvesLine">Calves <br>
+					<canvas id="calvesLine" class="chart chart-line" chart-data="statsData.calves[0]"
+							chart-labels="labels" chart-series="series[7]" chart-options="options"
+							chart-dataset-override="ThighdatasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
+			<div class="medium-4 columns">
+				<label for="thighsLine">Thighs <br>
+					<canvas id="thighsLine" class="chart chart-line" chart-data="statsData.thighs[0]"
+							chart-labels="labels" chart-series="series[8]" chart-options="options"
+							chart-dataset-override="ThighdatasetOverride" chart-click="pointData"
+							chart-colors="bmiColors"></canvas>
+				</label>
+			</div>
 		</div>
 	</div>
 </div>

@@ -43,7 +43,9 @@ gulp.task('sprites', function () {
 	var cssStream = spriteData.css.pipe(gulp.dest(source + "/sass/components/"));
 	return merge(imgStream, cssStream);
 });
-
+gulp.task('jsmin', function(){
+	//return gulp.src(source + )
+})
 gulp.task('build', ['css', 'img']);
 gulp.task('sprite_css', function(cb){
 	run('sprite', 'css', cb)

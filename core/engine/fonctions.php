@@ -230,26 +230,4 @@ function tableFromSql($res)
     return $t;
 }
 
-// sort array by date
-function sort_by_date($sql_res, $date, $val)
-{
-    $a = [];
-    $tmpArr = [];
-    $dateArr = [];
-    $valArr = [];
-    if (mysqli_num_rows($sql_res) > 0) {
-        while ($arr = mysqli_fetch_assoc($sql_res)) {
-            $tmpArr[intval($arr[$date])] = intval($arr[$val]);
-        }
-        ksort($tmpArr);
-        foreach ($tmpArr as $key => $value) {
-            $dateArr[] = ts2date($key);
-            $valArr[] = $value;
-        }
-        $a[] = $dateArr;
-        $a[] = $valArr;
-    }
-    return $a;
-}
-
 ?>
