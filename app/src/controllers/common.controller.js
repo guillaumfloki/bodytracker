@@ -52,4 +52,5 @@ angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", 
 			});
 		}
 	};
-}]);
+
+}])

@@ -1,0 +1,138 @@
+/*
+  SASS variables are information about icon's compiled state, stored under its original file name
+
+  .icon-home
+    width: $icon-home-width
+
+  The large array-like variables contain all information about a single icon
+  $icon-home: x y offset_x offset_y width height total_width total_height image_path
+
+  At the bottom of this section, we provide information about the spritesheet itself
+  $spritesheet: width height image $spritesheet-sprites
+  */
+$c-01-name: 'c-01'
+$c-01-x: 0px
+$c-01-y: 2048px
+$c-01-offset-x: 0px
+$c-01-offset-y: -2048px
+$c-01-width: 1920px
+$c-01-height: 1080px
+$c-01-total-width: 4480px
+$c-01-total-height: 4232px
+$c-01-image: '../images/sprite.jpg'
+$c-01: (0px, 2048px, 0px, -2048px, 1920px, 1080px, 4480px, 4232px, '../images/sprite.jpg', 'c-01', )
+$c-02-name: 'c-02'
+$c-02-x: 1920px
+$c-02-y: 2048px
+$c-02-offset-x: -1920px
+$c-02-offset-y: -2048px
+$c-02-width: 1280px
+$c-02-height: 853px
+$c-02-total-width: 4480px
+$c-02-total-height: 4232px
+$c-02-image: '../images/sprite.jpg'
+$c-02: (1920px, 2048px, -1920px, -2048px, 1280px, 853px, 4480px, 4232px, '../images/sprite.jpg', 'c-02', )
+$c-03-name: 'c-03'
+$c-03-x: 0px
+$c-03-y: 0px
+$c-03-offset-x: 0px
+$c-03-offset-y: 0px
+$c-03-width: 2560px
+$c-03-height: 2048px
+$c-03-total-width: 4480px
+$c-03-total-height: 4232px
+$c-03-image: '../images/sprite.jpg'
+$c-03: (0px, 0px, 0px, 0px, 2560px, 2048px, 4480px, 4232px, '../images/sprite.jpg', 'c-03', )
+$c-04-name: 'c-04'
+$c-04-x: 2560px
+$c-04-y: 0px
+$c-04-offset-x: -2560px
+$c-04-offset-y: 0px
+$c-04-width: 1920px
+$c-04-height: 1200px
+$c-04-total-width: 4480px
+$c-04-total-height: 4232px
+$c-04-image: '../images/sprite.jpg'
+$c-04: (2560px, 0px, -2560px, 0px, 1920px, 1200px, 4480px, 4232px, '../images/sprite.jpg', 'c-04', )
+$c-05-name: 'c-05'
+$c-05-x: 2560px
+$c-05-y: 1200px
+$c-05-offset-x: -2560px
+$c-05-offset-y: -1200px
+$c-05-width: 1280px
+$c-05-height: 800px
+$c-05-total-width: 4480px
+$c-05-total-height: 4232px
+$c-05-image: '../images/sprite.jpg'
+$c-05: (2560px, 1200px, -2560px, -1200px, 1280px, 800px, 4480px, 4232px, '../images/sprite.jpg', 'c-05', )
+$c-06-name: 'c-06'
+$c-06-x: 0px
+$c-06-y: 3128px
+$c-06-offset-x: 0px
+$c-06-offset-y: -3128px
+$c-06-width: 1113px
+$c-06-height: 1104px
+$c-06-total-width: 4480px
+$c-06-total-height: 4232px
+$c-06-image: '../images/sprite.jpg'
+$c-06: (0px, 3128px, 0px, -3128px, 1113px, 1104px, 4480px, 4232px, '../images/sprite.jpg', 'c-06', )
+$spritesheet-width: 4480px
+$spritesheet-height: 4232px
+$spritesheet-image: '../images/sprite.jpg'
+$spritesheet-sprites: ($c-01, $c-02, $c-03, $c-04, $c-05, $c-06, )
+$spritesheet: (4480px, 4232px, '../images/sprite.jpg', $spritesheet-sprites, )
+
+/*
+  The provided mixins are intended to be used with the array-like variables
+
+  .icon-home
+    @include sprite-width($icon-home)
+
+  .icon-email
+    @include sprite($icon-email)
+
+  Example usage in HTML:
+    `display: block` sprite:
+    <div class="icon-home"></div>
+
+  To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+    // CSS
+    .icon {
+      display: inline-block;
+    }
+
+    // HTML
+    <i class="icon icon-home"></i>
+  */
+@mixin sprite-width($sprite)
+  width: nth($sprite, 5)
+
+@mixin sprite-height($sprite)
+  height: nth($sprite, 6)
+
+@mixin sprite-position($sprite)
+  $sprite-offset-x: nth($sprite, 3)
+  $sprite-offset-y: nth($sprite, 4)
+  background-position: $sprite-offset-x  $sprite-offset-y
+
+@mixin sprite-image($sprite)
+  $sprite-image: nth($sprite, 9)
+  background-image: url(#{$sprite-image})
+
+@mixin sprite($sprite)
+  @include sprite-image($sprite)
+  @include sprite-position($sprite)
+  @include sprite-width($sprite)
+  @include sprite-height($sprite)
+
+/*
+  The `sprites` mixin generates identical output to the CSS template
+    but can be overridden inside of SASS
+
+  @include sprites($spritesheet-sprites)
+  */
+@mixin sprites($sprites)
+  @each $sprite in $sprites
+    $sprite-name: nth($sprite, 10)
+    .#{$sprite-name}
+      @include sprite($sprite)
