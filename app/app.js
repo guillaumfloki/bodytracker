@@ -10,21 +10,21 @@ var app = angular.module('btApp', [
 	'btApp.version',
 	'btApp.charts',
 ]);
-app.config(['$locationProvider', '$routeProvider', '$stateProvider', function ($locationProvider, $routeProvider, $stateProvider) {
+app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 	$locationProvider.hashPrefix('!');
 
 	$routeProvider
 		.when('/login', {
-			templateUrl: 'views/login/login.html',
-			controller: 'loginCtrl'
+			templateUrl: 'views/login/login.tpl.html',
+			controller: 'loginController'
 		})
 		.when('/form', {
-			templateUrl: 'views/form/form.html',
-			controller: 'formCtrl'
+			templateUrl: 'views/form/form.tpl.html',
+			controller: 'formController'
 		})
 		.when('/stats', {
-			templateUrl: 'views/stats/stats.html',
-			controller: 'statsCtrl'
+			templateUrl: 'views/stats/stats.tpl.html',
+			controller: 'statsController'
 		})
 		.otherwise({redirectTo: '/login'});
 
