@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('btApp.form', ['ngRoute'])
-	.controller('formCtrl', function ($rootScope, $scope, $route, $state, userService, measureService, $timeout, $sce) {
+	.controller('formController', function ($rootScope, $scope, $route, $state, userService, measureService, $timeout) {
 		$scope.resetRes = function () {
 			$scope.result = {
 				bool: false,

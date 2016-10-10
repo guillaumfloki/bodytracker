@@ -1,5 +1,5 @@
-angular.module('btApp').controller('CommonCtrl', ["$scope", "$rootScope", "$location", "$state", 'userService', function ($scope, $rootScope, $location, $state, userService) {
-	$scope.distPath = "dist/";
+angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", "$location", "$state", 'userService', function ($scope, $rootScope, $location, $state, userService) {
+	$scope.distPath = "../dist/";
 	$scope.distCssPath = $scope.distPath + 'css/';
 	$scope.distCssFilePath = $scope.distCssPath + "styles.css";
 
@@ -52,5 +52,4 @@ angular.module('btApp').controller('CommonCtrl', ["$scope", "$rootScope", "$loca
 			});
 		}
 	};
-
-}])
+}]);

@@ -5,6 +5,8 @@ $id = $_GET['id'];
 $res = $mysqli->query("SELECT weight, date FROM body_measures WHERE id_user = '$id' ");
 $a = [];
 $tmpArr = [];
+$weightArr = [];
+$dateArr = [];
 if (mysqli_num_rows($res) > 0) {
     while ($arr = mysqli_fetch_assoc($res)) {
         $tmpArr[intval($arr['date'])] = intval($arr['weight']);
