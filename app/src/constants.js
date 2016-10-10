@@ -21,6 +21,7 @@
         FILTERS_PATH + "filters.js",
 
         PAGE_PATH + "stats/stat_charts.js",
+
     ];
     /*document.body.appendChild() doesn't seem to work well: use document.write instead*/
      FILE_PATHS.forEach(function(filePath) {

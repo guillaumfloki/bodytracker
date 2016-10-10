@@ -10,13 +10,13 @@ var run = require('run-sequence');
 
 //tasks
 gulp.task('css', function () {
-	return gulp.src(source + "/css/*.scss")
-		.pipe(plugins.sass().on('error', plugins.sass.logError))
-		.pipe(plugins.csscomb())
-		.pipe(plugins.cssbeautify({indent: "    "}))
-		.pipe(plugins.autoprefixer({cascade: false}))
-		.pipe(plugins.csso())
-		.pipe(gulp.dest(destination + "/css"));
+    return gulp.src(source + "/css/*.scss")
+        .pipe(plugins.sass().on('error', plugins.sass.logError))
+        .pipe(plugins.csscomb())
+        .pipe(plugins.cssbeautify({indent: "    "}))
+        .pipe(plugins.autoprefixer({cascade: false}))
+        .pipe(plugins.csso())
+        .pipe(gulp.dest(destination + "/css"));
 });
 gulp.task('img', function () {
 	return gulp.src(source + imagesTypes)

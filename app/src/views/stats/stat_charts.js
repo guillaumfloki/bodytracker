@@ -2,7 +2,7 @@
  * Created by gferber on 04/10/2016.
  */
 var chartApp = angular.module('btApp.charts', ['chart.js']);
-chartApp.controller('LineCtrl', function ($scope, measureService) {
+chartApp.controller('LineController', function ($scope, measureService) {
 	$scope.weightData = [];
 	$scope.labels = [];
 	$scope.weightTitle = "Weight stats";
