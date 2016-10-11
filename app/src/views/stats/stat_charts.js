@@ -3,6 +3,10 @@
  */
 var chartApp = angular.module('btApp.charts', ['chart.js']);
 chartApp.controller('LineController', function ($scope, measureService) {
+	$scope.colors = ['#FDB45C','#803690', '#4D5360','#DCDCDC', '#00ADF9', '#46BFBD', '#949FB1' ] ;
+	(function(ChartJsProvider){
+		ChartJsProvider.setOptions({colors:$scope.colors})
+	});
 	$scope.statsData = {
 		weight: [],
 		neck: [],
@@ -14,7 +18,6 @@ chartApp.controller('LineController', function ($scope, measureService) {
 		thighs: [[], []],
 	};
 	$scope.labels = [];
-	$scope.weightTitle = "Weight stats";
 	$scope.statsUser = [];
 	$scope.getWeightStats = function (id) {
 		measureService.getWeightStats(id).success(function (data) {
@@ -24,15 +27,15 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				startWeight: data[0][1],
 				targetWeight: data[0][2],
 			};
-			$scope.statsUser.bmi=[];
-			angular.forEach(data[2], function(v){
+			$scope.statsUser.bmi = [];
+			angular.forEach(data[2], function (v) {
 				$scope.statsUser.bmi.push(parseFloat(bmi.calculate(data[0][0], angular.element(v)[0].weight)));
 			});
 
 			//chart data
 
 			$scope.labels = data[1];
-			angular.forEach(data[2], function(v){
+			angular.forEach(data[2], function (v) {
 				$scope.statsData.weight.push(angular.element(v)[0].weight);
 				$scope.statsData.neck.push(angular.element(v)[0].neck);
 				$scope.statsData.waist.push(angular.element(v)[0].waist);
@@ -46,25 +49,50 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				$scope.statsData.thighs[1].push(angular.element(v)[0].thigh_left);
 			})
 			console.log($scope.statsData);
-			$scope.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left'] ];
-			$scope.ThighdatasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-			$scope.weightColors = ['#ff8e72'];
+			$scope.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
+
+			$scope.coupleDatasetOverride = [{yAxisID: 'y-axis-1'}, {yAxisID: 'y-axis-2'}];
+			$scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
 
 			$scope.bmiData = $scope.statsUser.bmi;
 			$scope.bmiLabels = data[1];
-			$scope.bmiColors = ['#72e3ff'];
+
 
 			$scope.pointData = function (points, evt) {
 				//console.log(points, evt);
 			};
-			$scope.datasetOverride = [
-				{
-					yAxisID: 'y-axis-1',
-					label: "Weight",
-					borderWidth: 3,
-					type: 'line'
+			$scope.generalOptions = {
+				scales: {
+					yAxes: [
+						{
+							id: 'y-axis-1',
+							type: 'linear',
+							display: true,
+							position: 'left'
+						}
+					]
 				}
-				];
+			}
+			$scope.bodyOptions = {
+				scales: {
+					yAxes: [
+						{
+							id: 'y-axis-1',
+							type: 'linear',
+							display: true,
+							position: 'left'
+						},
+						{
+							id: 'y-axis-2',
+							type: 'linear',
+							display: true,
+							position: 'right'
+						}
+					]
+				}
+			};
+
+
 			$scope.weightOptions = {
 				scales: {
 					yAxes: [

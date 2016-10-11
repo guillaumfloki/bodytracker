@@ -16,7 +16,8 @@ gulp.task('css', function () {
         .pipe(plugins.cssbeautify({indent: "    "}))
         .pipe(plugins.autoprefixer({cascade: false}))
         .pipe(plugins.csso())
-        .pipe(gulp.dest(destination + "/css"));
+        .pipe(gulp.dest(destination + "/css"))
+		.pipe(plugins.notify({message: "CSS task complete"}));
 });
 gulp.task('img', function () {
 	return gulp.src(source + imagesTypes)
@@ -26,6 +27,7 @@ gulp.task('img', function () {
 			multipass: true
 		}))
 		.pipe(gulp.dest(destination + "/images/"))
+		.pipe(plugins.notify({message: "Images task complete"}));
 });
 gulp.task('sprites', function () {
 	var spriteData = gulp.src(source + "/images/*.{jpg,jpeg}")
@@ -49,6 +51,9 @@ gulp.task('jsmin', function(){
 gulp.task('build', ['css', 'img']);
 gulp.task('sprite_css', function(cb){
 	run('sprite', 'css', cb)
+});
+gulp.task("watch", ['css'], function(){
+	gulp.watch(source + "/css/**/*.scss", ['css'])
 });
 gulp.task('prod', ['build']);
 gulp.task('default', ['build']);

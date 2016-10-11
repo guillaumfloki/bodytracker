@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 08 Octobre 2016 à 11:38
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Généré le :  Mar 11 Octobre 2016 à 11:30
+-- Version du serveur :  10.1.16-MariaDB
+-- Version de PHP :  5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `bodytracker`
@@ -28,8 +28,9 @@ USE `bodytracker`;
 -- Structure de la table `body_measures`
 --
 
-CREATE TABLE IF NOT EXISTS `body_measures` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `body_measures`;
+CREATE TABLE `body_measures` (
+  `id` int(10) NOT NULL,
   `id_user` int(10) DEFAULT NULL,
   `date` int(16) NOT NULL,
   `weight` int(10) NOT NULL,
@@ -43,32 +44,37 @@ CREATE TABLE IF NOT EXISTS `body_measures` (
   `thigh_right` int(10) NOT NULL,
   `thigh_left` int(10) NOT NULL,
   `waist` int(10) NOT NULL,
-  `id_image` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_image` (`id_image`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `id_image` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `body_measures`
 --
 
 TRUNCATE TABLE `body_measures`;
+--
+-- Contenu de la table `body_measures`
+--
+
+INSERT INTO `body_measures` (`id`, `id_user`, `date`, `weight`, `neck`, `chest`, `shoulders`, `arm_right`, `arm_left`, `calf_right`, `calf_left`, `thigh_right`, `thigh_left`, `waist`, `id_image`) VALUES
+(32, 3, 1453417200, 100, 21, 21, 21, 21, 2, 1, 21, 21, 2, 12, 0),
+(34, 3, 1453417800, 104, 21, 21, 21, 21, 2, 1, 21, 21, 2, 12, 0),
+(35, 3, 1456095600, 99, 54, 54, 54, 54, 5, 4, 54, 54, 54, 54, 0),
+(36, 3, 1458946800, 97, 87, 87, 87, 87, 87, 87, 87, 87, 87, 87, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `images`
 --
 
-CREATE TABLE IF NOT EXISTS `images` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `images`;
+CREATE TABLE `images` (
+  `id` int(10) NOT NULL,
   `id_user` int(10) DEFAULT NULL,
   `url` text NOT NULL,
-  `date` int(20) NOT NULL,
-  `comment` text,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `date` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `images`
@@ -78,38 +84,12 @@ TRUNCATE TABLE `images`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `session`
---
-
-CREATE TABLE IF NOT EXISTS `session` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `id_user` int(10) DEFAULT NULL,
-  `date` int(255) NOT NULL,
-  `duration` int(255) NOT NULL,
-  `location` text NOT NULL,
-  `goal` text NOT NULL,
-  `mood` varchar(20) NOT NULL,
-  `conditions` enum('good','normal','bad','worst') NOT NULL,
-  `conditions_comment` text NOT NULL,
-  `type` enum('endurance','strenght','mix') NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_user` (`id_user`),
-  KEY `id_user_2` (`id_user`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Vider la table avant d'insérer `session`
---
-
-TRUNCATE TABLE `session`;
--- --------------------------------------------------------
-
---
 -- Structure de la table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(10) NOT NULL,
   `lastname` varchar(60) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `username` varchar(60) NOT NULL,
@@ -118,10 +98,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   `age` int(100) NOT NULL,
   `gender` enum('m','f') NOT NULL,
   `height` int(100) NOT NULL,
-  `weight` int(255) NOT NULL,
-  `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `start_weight` int(255) NOT NULL,
+  `target_weight` int(100) DEFAULT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Vider la table avant d'insérer `user`
@@ -132,33 +112,54 @@ TRUNCATE TABLE `user`;
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `lastname`, `firstname`, `username`, `password`, `signup_date`, `age`, `gender`, `height`, `weight`, `status`) VALUES
-(1, 'Wayne', 'Bruce', 'batman', '7d9b5c572750a18c533c07bbaf97bf014fa798fb7a7b5e0397d07750ed31d7dc', 0, 42, 'm', 198, 114, ''),
-(3, 'kent', 'clarke', 'superman', '81880b9160d9457b1430077203f4a47c2980e9d0757598f31d1ba7def1511914', 0, 39, 'm', 198, 104, '');
+INSERT INTO `user` (`id`, `lastname`, `firstname`, `username`, `password`, `signup_date`, `age`, `gender`, `height`, `start_weight`, `target_weight`, `status`) VALUES
+(1, 'Wayne', 'Bruce', 'batman', '7d9b5c572750a18c533c07bbaf97bf014fa798fb7a7b5e0397d07750ed31d7dc', 0, 42, 'm', 198, 114, 100, 'active'),
+(3, 'kent', 'clarke', 'superman', '81880b9160d9457b1430077203f4a47c2980e9d0757598f31d1ba7def1511914', 0, 39, 'm', 198, 104, 100, 'active');
 
 --
--- Contraintes pour les tables exportées
+-- Index pour les tables exportées
 --
 
 --
--- Contraintes pour la table `body_measures`
+-- Index pour la table `body_measures`
 --
 ALTER TABLE `body_measures`
-  ADD CONSTRAINT `body_measures_ibfk_2` FOREIGN KEY (`id_image`) REFERENCES `images` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `body_measures_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_image` (`id_image`);
 
 --
--- Contraintes pour la table `images`
+-- Index pour la table `images`
 --
 ALTER TABLE `images`
-  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `session` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
 
 --
--- Contraintes pour la table `session`
+-- Index pour la table `user`
 --
-ALTER TABLE `session`
-  ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
 
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `body_measures`
+--
+ALTER TABLE `body_measures`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT pour la table `images`
+--
+ALTER TABLE `images`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
