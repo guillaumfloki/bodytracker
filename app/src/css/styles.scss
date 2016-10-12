@@ -1,6 +1,17 @@
 @import "settings/variables";
+@import "tools/functions";
+@import "tools/mixins";
 @import "fa/font-awesome";
 @import "base/base";
+
+// objects
+@import "objects/container";
+
+// components
+@import "components/header";
+@import "components/footer";
+@import "components/stats";
+
 .colored {
 	background-color: red;
 	color: #fff;
