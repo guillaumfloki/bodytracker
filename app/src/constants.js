@@ -11,6 +11,7 @@
         CTRL_PATH + "stats.controller.js",
         CTRL_PATH + "form.controller.js",
         CTRL_PATH + "login.controller.js",
+        CTRL_PATH + "profile.controller.js",
 
         SERVICES_PATH + "mainService.js",
 

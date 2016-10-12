@@ -1,0 +1,7 @@
+<div ng-init="initView()">
+	<div ng-controller="LineController" class="medium-12 column stats">
+		<h1>User profile</h1>
+		<p><span ng-bind="currentUser.firstname | capitalize"></span> <span ng-bind="currentUser.lastname | capitalize"></span></p>
+		<p ng-bind=""></p>
+	</div>
+</div>
