@@ -7,6 +7,7 @@ var app = angular.module('btApp', [
 	'btApp.form',
 	'btApp.stats',
 	'btApp.login',
+	'btApp.profile',
 	'btApp.version',
 	'btApp.charts',
 ]);
@@ -25,6 +26,10 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
 		.when('/stats', {
 			templateUrl: 'views/stats/stats.tpl.html',
 			controller: 'statsController'
+		})
+		.when('/profile', {
+			templateUrl: 'views/profile/profile.tpl.html',
+			controller: 'profileController'
 		})
 		.otherwise({redirectTo: '/login'});
 

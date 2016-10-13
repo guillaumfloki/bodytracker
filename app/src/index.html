@@ -38,6 +38,7 @@
             <ul class="right">
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="warning">Sign up</a></li>
+                <li ng-if="isAuthenticated()"><a href="#!/profile" ng-click="switchPanels('3')">Profile</a></li>
                 <li><a ng-click="logout()" ng-if="isAuthenticated()" class=""button><span class="fa fa-sign-out"></span></a></li>
             </ul>
         </section>

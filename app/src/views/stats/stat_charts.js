@@ -48,7 +48,7 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				$scope.statsData.thighs[0].push(angular.element(v)[0].thigh_right);
 				$scope.statsData.thighs[1].push(angular.element(v)[0].thigh_left);
 			})
-			console.log($scope.statsData);
+			//console.log($scope.statsData);
 			$scope.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
 
 			$scope.coupleDatasetOverride = [{yAxisID: 'y-axis-1'}, {yAxisID: 'y-axis-2'}];
