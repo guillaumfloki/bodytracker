@@ -11,7 +11,7 @@
 				</label>
 			</div>
 			<div class="medium-6 columns"><label for="bmiLine">BMI <br>
-				<canvas id="bmiLine" class="chart chart-line" chart-data="bmiData"
+				<canvas id="bmiLine" class="chart chart-line" chart-data="statsData.bmi"
 						chart-labels="bmiLabels" chart-series="series['BMI']" chart-options="generalOptions"
 						chart-dataset-override="datasetOverride" chart-click="pointData"
 						chart-colors="colors"></canvas>
@@ -19,6 +19,7 @@
 			</div>
 		</div>
 		<div class="medium-12 columns">
+
 			<div class="medium-3 columns">
 				<label for="bmiLine">Neck <br>
 					<canvas id="neckLine" class="chart chart-line" chart-data="statsData.neck"

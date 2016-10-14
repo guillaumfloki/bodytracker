@@ -1,7 +1,27 @@
 <div ng-init="initView()">
-	<div ng-controller="LineController" class="medium-12 column stats">
-		<h1>User profile</h1>
-		<p><span ng-bind="currentUser.firstname | capitalize"></span> <span ng-bind="currentUser.lastname | capitalize"></span></p>
-		<p ng-bind=""></p>
+	<div class="row bump" ng-controller="LineController">
+		<div class="small-12 large-6 columns stats">
+			<div class="row">
+				<div class="profile-card">
+					<div class="small-12 large-4 columns">
+						<a href="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/128.jpg">
+							<img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/128.jpg" alt="profile image"> </a>
+					</div>
+					<div class="small-12 large-8 columns">
+						<h4><span ng-bind="currentUser.firstname | capitalize"></span> <span ng-bind="currentUser.lastname | capitalize"></span> <span>President of XPTO</span></h4>
+						<p><i class="fa fa-user"></i>&nbsp;<span ng-bind="currentUser.username"></span></p>
+						<p><i class="fa fa-clock-o"></i>&nbsp;Last login: {{currentUser.last_login | date:'dd/mm/yyyy à HH:mm'}}</p>
+						<p><i class="fa fa-link"></i>&nbsp;thisisme@myemail.com</p>
+					</div>
+					<div class="row collapse">
+						<ul class="button-group even-3">
+							<li><a href="#" class="button"> Followers <span>432 </span></a></li>
+							<li><a href="#" class="button"> Following <span>432 </span></a></li>
+							<li><a href="#" class="button"> Views <span>432 </span></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
