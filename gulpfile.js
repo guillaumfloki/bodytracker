@@ -1,49 +1,50 @@
-var gulp = require("gulp");
-var plugins = require('gulp-load-plugins')();
-var spritesmith = require('gulp.spritesmith');
-var buffer = require('vinyl-buffer');
-var merge = require('merge-stream');
-var basePath = "./app";
-var source = basePath + "/src";
-var destination = basePath + "/dist";
-var run = require('run-sequence');
+var gulp = require("gulp"),
+    plugins = require('gulp-load-plugins')(),
+    spritesmith = require('gulp.spritesmith'),
+    buffer = require('vinyl-buffer'),
+    merge = require('merge-stream'),
+    basepath = "./app",
+    source = basepath + "/src",
+    destination = basepath + "/dist",
+    run = require('run-sequence'),
+	sass = require("gulp-sass");
 
 //tasks
 gulp.task('css', function () {
-    return gulp.src(source + "/css/*.scss")
-        .pipe(plugins.sass().on('error', plugins.sass.logError))
-        .pipe(plugins.csscomb())
-        .pipe(plugins.cssbeautify({indent: "    "}))
-        .pipe(plugins.autoprefixer({cascade: false}))
-        .pipe(plugins.csso())
-        .pipe(gulp.dest(destination + "/css"))
-		.pipe(plugins.notify({message: "CSS task complete"}));
+	return gulp.src(source + "/css/*.scss")
+	.pipe(sass())
+	.pipe(plugins.csscomb())
+	.pipe(plugins.cssbeautify({indent: "    "}))
+	.pipe(plugins.autoprefixer({cascade: false}))
+	.pipe(plugins.csso())
+	.pipe(gulp.dest(destination + "/css"))
+	.pipe(plugins.notify({message: "css task complete"}));
 });
 gulp.task('img', function () {
-	return gulp.src(source + imagesTypes)
-		.pipe(plugins.imagemin({
-			progressive: true,
-			interlaced: true,
-			multipass: true
-		}))
-		.pipe(gulp.dest(destination + "/images/"))
-		.pipe(plugins.notify({message: "Images task complete"}));
+	return gulp.src(source + imagestypes)
+	.pipe(plugins.imagemin({
+		progressive: true,
+		interlaced: true,
+		multipass: true
+	}))
+	.pipe(gulp.dest(destination + "/images/"))
+	.pipe(plugins.notify({message: "images task complete"}));
 });
 gulp.task('sprites', function () {
-	var spriteData = gulp.src(source + "/images/*.{jpg,jpeg}")
-		.pipe(buffer())
-		.pipe(plugins.imagemin())
-		.pipe(spritesmith({
-			imgName: "../images/sprite.jpg",
-			cssName: "_sprites.scss",
-			algorithm: 'binary-tree',
-			cssVarMap: function (t) {
-				t.name = "c-" + t.name
-			}
-		}));
-	var imgStream = spriteData.img.pipe(gulp.dest(destination + '/images/'));
-	var cssStream = spriteData.css.pipe(gulp.dest(source + "/sass/components/"));
-	return merge(imgStream, cssStream);
+	var spritedata = gulp.src(source + "/images/*.{jpg,jpeg}")
+	.pipe(buffer())
+	.pipe(plugins.imagemin())
+	.pipe(spritesmith({
+		imgname: "../images/sprite.jpg",
+		cssname: "_sprites.scss",
+		algorithm: 'binary-tree',
+		cssvarmap: function (t) {
+			t.name = "c-" + t.name
+		}
+	}));
+	var imgstream = spritedata.img.pipe(gulp.dest(destination + '/images/'));
+	var cssstream = spritedata.css.pipe(gulp.dest(source + "/sass/components/"));
+	return merge(imgstream, cssstream);
 });
 gulp.task('jsmin', function(){
 	//return gulp.src(source + )

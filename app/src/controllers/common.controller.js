@@ -7,10 +7,6 @@ angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", 
 		localStorage.removeItem('currentUser');
 		$location.url('/login');
 	};
-	$scope.defaultPanel = '1';
-	$scope.switchPanels = function (panel) {
-		$scope.defaultPanel = panel;
-	};
 	$scope.isAuthenticated = function () {
 		var bool = false;
 		if (localStorage.getItem('currentUser')) {
@@ -23,6 +19,8 @@ angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", 
 	$scope.initView = function () {
 		if (!$scope.isAuthenticated()) {
 			$location.url('/login');
+		}else {
+			$location.url('/profile');
 		}
 	};
 	$scope.signin = function (user) {
@@ -31,7 +29,7 @@ angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", 
 				localStorage.removeItem('currentUser');
 				localStorage.setItem('currentUser', JSON.stringify(data));
 				$scope.currentUser = data;
-				$location.url('/form');
+				$location.url('/profile');
 			}).error(function (error) {
 				console.log(error);
 			});

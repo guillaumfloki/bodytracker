@@ -13,6 +13,10 @@ chartApp.controller('LineController', function ($scope, measureService) {
 	$scope.getWeightStats = function (id) {
 		measureService.getBodyStats(id).success(function (data) {
 			//build user stats info
+			$scope.stats = true;
+			if(data == "0"){
+				return $scope.stats = false;
+			}
 			$scope.statsData = {
 				height: data[0][0],
 				startWeight: data[0][1],
@@ -42,7 +46,8 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				$scope.statsData.calves[1].push(angular.element(v)[0].calf_left);
 				$scope.statsData.thighs[0].push(angular.element(v)[0].thigh_right);
 				$scope.statsData.thighs[1].push(angular.element(v)[0].thigh_left);
-			})
+			});
+
 			$scope.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
 			$scope.coupleDatasetOverride = [{yAxisID: 'y-axis-1'}, {yAxisID: 'y-axis-2'}];
 			$scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
