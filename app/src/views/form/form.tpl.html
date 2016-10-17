@@ -12,7 +12,7 @@
 			<form novalidate ng-submit="addMeasures(measures)">
 				<input type="hidden" value="{{currentUser.id}}" ng-model="measures.id_user">
 
-				<div class="medium-6 columns"><input date-picker timezone="Europe/London" type="date" placeholder="Date" ng-model="measures.datetime"
+				<div class="medium-6 columns"><input type="datetime" placeholder="Date" ng-model="measures.datetime"
 													 required></div>
 				<div class="medium-6 columns"><input type="number" placeholder="Weight" ng-model="measures.weight"
 													 required></div>
