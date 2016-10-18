@@ -9,10 +9,9 @@ $res = $mysqli->query("SELECT id FROM user WHERE username = '$username' AND pass
 $a = null;
 if (mysqli_num_rows($res) > 0) {
     mysqli_free_result($res);
-    $t = time() * 1000;
+    $t = time();
     $mysqli->query("UPDATE user SET last_login='$t' WHERE username = '$username' AND password = '$hash'");
-    $res2 = $mysqli->query("SELECT * FROM user WHERE username = '$username' AND password = '$hash'");
-    $a = sql2json($res2, 'currentUser');
+    $a = sql2json($mysqli->query("SELECT * FROM user WHERE username = '$username' AND password = '$hash'"), 'currentUser');
 }
 echo $a;
 ?>

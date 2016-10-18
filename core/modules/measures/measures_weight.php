@@ -8,16 +8,17 @@ array returned:
 [2]=> (array) weight values (metric)
 */
 $id = $_GET['id'];
-// get user data from body_measures
-$res = $mysqli->query("SELECT weight, date, height, start_weight, target_weight, neck, chest, shoulders, arm_right, arm_left, calf_right, calf_left, thigh_right, thigh_left, waist FROM body_measures, user WHERE id_user = '$id' AND body_measures.id_user = user.id");
 $a = [];
 $tmp_arr = [];
 $tmp_arr2 = [];
 $date_arr = [];
 $val_arr = [];
 $start_values = [];
-// more than 1 row
-if (mysqli_num_rows($res) > 1) {
+// get user data from body_measures
+$res = $mysqli->query("SELECT weight, date, height, start_weight, target_weight, neck, chest, shoulders, arm_right, arm_left, calf_right, calf_left, thigh_right, thigh_left, waist FROM body_measures, user WHERE id_user = '$id' AND body_measures.id_user = user.id");
+if(mysqli_num_rows($res) === 0){
+    die("0");
+}elseif (mysqli_num_rows($res) > 1) { // more than 1 row
     while ($arr = mysqli_fetch_assoc($res)) {
         // duplicate values for late exploit
         $start_values = $arr;

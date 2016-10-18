@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="btApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="btApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html lang="fr" ng-app="btApp" class="no-js" ng-controller="CommonController">
+<html lang="fr" ng-app="btApp" class="no-js" ng-controller="CommonController" ng-init="initView()">
 <!--<![endif]-->
 
 <head>
@@ -12,10 +12,10 @@
     <title>Body Tracker</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" href="../components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="../components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="../components/foundation/css/foundation.min.css">
+    <link rel="stylesheet" href="../components/angular-datepicker/dist/angular-datepicker.min.css">
     <link rel="stylesheet" href="{{distCssFilePath}}">
     <script src="../components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="../components/angular/angular.js"></script>
@@ -25,20 +25,23 @@
     <script src="../components/foundation/js/foundation.min.js"></script>
     <script src="../components/chart.js/dist/Chart.min.js"></script>
     <script src="../components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="../components/moment/moment.js"></script>
+    <script src="../components/moment-timezone/moment-timezone.js"></script>
+    <script src="../components/angular-datepicker/dist/angular-datepicker.min.js"></script>
 </head>
 
 <body>
     <nav class="top-bar" data-topbar role="navigation">
         <section class="top-bar-section">
             <ul class="left">
-                <li ng-if="isAuthenticated()" ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a href="#!/form"><span class="fa fa-check-square-o"></span>&nbsp;Form</a></li>
+                <li ng-if="isAuthenticated()" ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a href="#!/form"><span class="fa fa-check-square-o"></span>&nbsp;Add measures</a></li>
                 <li ng-if="isAuthenticated()"><a href="#!/stats"><span class="fa fa-bar-chart"></span>&nbsp;Stats</a></li>
             </ul>
             <ul class="right">
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
                 <li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="warning">Sign up</a></li>
-                <li ng-if="isAuthenticated()"><a href="#!/profile" ng-click="switchPanels('3')">Profile</a></li>
-                <li><a ng-click="logout()" ng-if="isAuthenticated()" class=""button><span class="fa fa-sign-out"></span></a></li>
+                <li ng-if="isAuthenticated()" class="active"><a href="#!/profile"><span class="fa fa-user"></span>&nbsp;Profile</a></li>
+                <li ng-if="isAuthenticated()"><a ng-click="logout()" href=""><span class="fa fa-sign-out"></span>&nbsp;Log out</a></li>
             </ul>
         </section>
     </nav>
@@ -46,11 +49,12 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
     <div ng-view></div>
-    <footer class="medium-12 columns bt-footer"><p blush class="left">BodyTracker app: v<span app-version></span></p></footer>
+    <footer class="medium-12 columns bt-footer">
+        <p blush class="left">BodyTracker app: v<span app-version></span></p>
+    </footer>
     <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-
     <script src="app.js"></script>
     <script src="constants.js"></script>
 </body>
