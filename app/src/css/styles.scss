@@ -9,10 +9,11 @@
 @import "objects/container";
 
 // components
-@import "components/header";
-@import "components/footer";
-@import "components/stats";
+@import "components/_header";
+@import "components/_footer";
+@import "components/_stats";
 @import "components/profile";
+@import "components/draggable";
 
 .colored {
 	background-color: red;

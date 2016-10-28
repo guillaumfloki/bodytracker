@@ -1,6 +1,7 @@
 <div class="main">
 	<div class="form-result" ng-show="result.bool==true">
-		<p class="{{result.class}}"><span class="fa fa-{{result.sign}}"></span>&nbsp;<span ng-bind="result.text"></span></p>
+		<p class="{{result.class}}"><span class="fa fa-{{result.sign}}"></span>&nbsp;<span ng-bind="result.text"></span>
+		</p>
 	</div>
 	<div class="">
 		<div class="small-12 medium-12 large-6 columns col-centered">
@@ -9,9 +10,9 @@
 				<hr>
 				<h2>Add new body measures (metric values)</h2>
 			</div>
-			<form novalidate ng-submit="addMeasures(measures)">
+			<form novalidate ng-submit="addMeasures(measures)" image-action="../../core/modules/measures/image_add.php" image-method="post">
 				<input type="hidden" value="{{currentUser.id}}" ng-model="measures.id_user">
-
+				<input type="file" hidden id="fileElem" multiple accept="image/*" ng-model="measures.image" name="measures_image">
 				<div class="medium-6 columns"><input type="datetime" placeholder="Date" ng-model="measures.datetime"
 													 required></div>
 				<div class="medium-6 columns"><input type="number" placeholder="Weight" ng-model="measures.weight"
@@ -42,8 +43,9 @@
 				<div class="medium-6 columns"><input type="number" placeholder="Waist" ng-model="measures.waist"
 													 required></div>
 
-				<div class="medium-6 columns" hidden><input type="file" ng-model="measures.image"></div>
-
+				<div class="medium-6 columns">
+					<div id="dropbox" bt-draggable preview="previewBox">Drop your file here</div>
+				</div>
 				<div class="medium-12 columns">
 					<div class="button-group right">
 						<input type="reset" ng-click="reset('measures')" value="Reset" class="button secondary">
