@@ -19,6 +19,7 @@
         DIR_PATH + "version/version.js",
         DIR_PATH + "version/version.directive.js",
         DIR_PATH + "chartAltLine/chartAltLine.directive.js",
+        DIR_PATH + "selectFile/selectFile.directive.js",
 
         FILTERS_PATH + "filters.js",
 

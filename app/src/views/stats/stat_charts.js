@@ -3,35 +3,41 @@
  */
 var chartApp = angular.module('btApp.charts', ['chart.js']);
 chartApp.controller('LineController', function ($scope, measureService) {
-	$scope.colors = ['#FDB45C','#803690', '#4D5360','#DCDCDC', '#00ADF9', '#46BFBD', '#949FB1' ] ;
-	(function(ChartJsProvider){
-		ChartJsProvider.setOptions({colors:$scope.colors})
+	$scope.colors = ['#FDB45C', '#803690', '#4D5360', '#DCDCDC', '#00ADF9', '#46BFBD', '#949FB1'];
+	(function (ChartJsProvider) {
+		ChartJsProvider.setOptions({colors: $scope.colors})
 	});
-
-	$scope.labels = [];
-	$scope.statsUser = [];
+	$scope.stats = {
+		title: "Body measures stats",
+		labels: [],
+		enabled: true,
+		data: {
+			bmi: {
+				value: []
+			},
+			bmiWeight: [],
+			weight: [],
+			neck: [],
+			waist: [],
+			shoulders: [],
+			chest: [],
+			arms: [[], []],
+			calves: [[], []],
+			thighs: [[], []]
+		},
+	};
 	$scope.getWeightStats = function (id) {
 		measureService.getBodyStats(id).success(function (data) {
 			//build user stats info
-			$scope.stats = true;
-			if(data == "0"){
-				return $scope.stats = false;
+			if (data == "0") {
+				return $scope.stats.enabled = false;
 			}
-			$scope.statsData = {
-				height: data[0][0],
-				startWeight: data[0][1],
-				targetWeight: data[0][2],
-				bmi: [],
-				weight: [],
-				neck: [],
-				waist: [],
-				shoulders: [],
-				chest: [],
-				arms: [[], []],
-				calves: [[], []],
-				thighs: [[], []]
-			};
+			$scope.stats.data.height = data[0][0];
+			$scope.stats.data.startWeight = data[0][1];
+			$scope.stats.data.targetWeight = data[0][2];
+
 			//chart data
+<<<<<<< HEAD
 			$scope.labels = data[1];
 			angular.forEach(data[2], function (v) {
 				$scope.statsData.bmi.push(parseFloat(bmi.calculate(data[0][0], angular.element(v)[0].weight)));
@@ -46,20 +52,35 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				$scope.statsData.calves[1].push(angular.element(v)[0].calf_left);
 				$scope.statsData.thighs[0].push(angular.element(v)[0].thigh_right);
 				$scope.statsData.thighs[1].push(angular.element(v)[0].thigh_left);
+=======
+			$scope.stats.labels = data[1];
+			angular.forEach(data[2], function (value) {
+				$scope.stats.data.bmi.value.push(parseFloat(bmi.calculate(data[0][0], value.weight)));
+				$scope.stats.data.weight.push(value.weight);
+				$scope.stats.data.neck.push(value.neck);
+				$scope.stats.data.waist.push(value.waist);
+				$scope.stats.data.shoulders.push(value.shoulders);
+				$scope.stats.data.chest.push(value.chest);
+				$scope.stats.data.arms[0].push(value.arm_right);
+				$scope.stats.data.arms[1].push(value.arm_left);
+				$scope.stats.data.calves[0].push(value.calf_right);
+				$scope.stats.data.calves[1].push(value.calf_left);
+				$scope.stats.data.thighs[0].push(value.thigh_right);
+				$scope.stats.data.thighs[1].push(value.thigh_left);
+				$scope.stats.data.bmiWeight.push({
+					date: data[1],
+					bmi: $scope.stats.data.bmi.value,
+					weight: $scope.stats.data.weight
+				});
+>>>>>>> a443d749e9dda2db4c890e02382a4e3be8c827ed
 			});
-
-			$scope.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
-			$scope.coupleDatasetOverride = [{yAxisID: 'y-axis-1'}, {yAxisID: 'y-axis-2'}];
-			$scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
-
-			$scope.bmiData = $scope.statsUser.bmi;
-			$scope.bmiLabels = data[1];
-
+			$scope.stats.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
+			$scope.stats.datasetOverride = [{yAxisID: 'y-axis-1'}];
 
 			$scope.pointData = function (points, evt) {
 				//console.log(points, evt);
 			};
-			$scope.generalOptions = {
+			$scope.stats.generalOptions = {
 				scales: {
 					yAxes: [
 						{
@@ -71,7 +92,7 @@ chartApp.controller('LineController', function ($scope, measureService) {
 					]
 				}
 			}
-			$scope.bodyOptions = {
+			$scope.stats.bodyOptions = {
 				scales: {
 					yAxes: [
 						{
@@ -90,8 +111,7 @@ chartApp.controller('LineController', function ($scope, measureService) {
 				}
 			};
 
-
-			$scope.weightOptions = {
+			$scope.stats.weightOptions = {
 				scales: {
 					yAxes: [
 						{
@@ -118,7 +138,6 @@ chartApp.controller('LineController', function ($scope, measureService) {
 					]
 				}
 			};
-
 		}).error(function (error) {
 			console.log(error);
 		})
