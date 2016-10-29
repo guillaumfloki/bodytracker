@@ -37,22 +37,6 @@ chartApp.controller('LineController', function ($scope, measureService) {
 			$scope.stats.data.targetWeight = data[0][2];
 
 			//chart data
-<<<<<<< HEAD
-			$scope.labels = data[1];
-			angular.forEach(data[2], function (v) {
-				$scope.statsData.bmi.push(parseFloat(bmi.calculate(data[0][0], angular.element(v)[0].weight)));
-				$scope.statsData.weight.push(angular.element(v)[0].weight);
-				$scope.statsData.neck.push(angular.element(v)[0].neck);
-				$scope.statsData.waist.push(angular.element(v)[0].waist);
-				$scope.statsData.shoulders.push(angular.element(v)[0].shoulders);
-				$scope.statsData.chest.push(angular.element(v)[0].chest);
-				$scope.statsData.arms[0].push(angular.element(v)[0].arm_right);
-				$scope.statsData.arms[1].push(angular.element(v)[0].arm_left);
-				$scope.statsData.calves[0].push(angular.element(v)[0].calf_right);
-				$scope.statsData.calves[1].push(angular.element(v)[0].calf_left);
-				$scope.statsData.thighs[0].push(angular.element(v)[0].thigh_right);
-				$scope.statsData.thighs[1].push(angular.element(v)[0].thigh_left);
-=======
 			$scope.stats.labels = data[1];
 			angular.forEach(data[2], function (value) {
 				$scope.stats.data.bmi.value.push(parseFloat(bmi.calculate(data[0][0], value.weight)));
@@ -72,7 +56,6 @@ chartApp.controller('LineController', function ($scope, measureService) {
 					bmi: $scope.stats.data.bmi.value,
 					weight: $scope.stats.data.weight
 				});
->>>>>>> a443d749e9dda2db4c890e02382a4e3be8c827ed
 			});
 			$scope.stats.series = ['Weight', 'BMI', 'Neck', 'Waist', 'Shoulders', 'Chest', ['Arm right', 'Arm left'], ['Calf right', 'Calf left'], ['Thigh right', 'Thigh left']];
 			$scope.stats.datasetOverride = [{yAxisID: 'y-axis-1'}];

@@ -11,8 +11,8 @@
 
 						var settings = {
 							form: document.forms[0],
-							action: function(){return this.form.getAttribute('image-action')},
-							method: function(){return this.form.getAttribute('image-method')},
+							rerturnAction: function(){return this.form.getAttribute('image-action')},
+							rerturnMethod: function(){return this.form.getAttribute('image-method')},
 							dataType: 'json',
 							cache: false
 						};
@@ -56,15 +56,15 @@
 							});
 
 							$.ajax({
-								url: settings.action(),
-								type: settings.method(),
+								url: settings.rerturnAction(),
+								type: settings.rerturnMethod(),
 								dataType: settings.dataType,
 								data: ajaxData,
 								cache: settings.cache,
 								contentType: false,
 								processData: false,
 								success: function(data){
-									console.log(data.responseText);
+									//console.log(data.responseText);
 								}
 							});
 						}

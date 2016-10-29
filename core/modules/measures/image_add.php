@@ -1,4 +1,13 @@
 <?php
+/*TODO
+ *
+ * [] optimiser taille et poids de l'image
+ *    avant enregistrement sur le serveur
+ * [] exécuter ce script au sbmit du fomulaire
+ * [] Ajouter une référence de la nouvelle id_image dans table body_measures
+ *
+ *
+ * */
 $core_path = "../../engine/";
 include($core_path . "init.php");
 $image = $_FILES['measures_image'];
@@ -33,19 +42,16 @@ if (!is_dir($updted_path)) {
 
 $datetime = time();
 $new_file = $updted_path . $datetime . "." . $image_type;
-$updted_new_file = "../app/dist/images/" . $datetime . "." . $image_type;
+$updted_new_file = $updted_path.$datetime . "." . $image_type;
 // copy new image into newly created folder
 $copy = copy($image['tmp_name'], $new_file);
 $r = "0";
 if (@is_file($new_file)) {
-    $query = $mysqli->prepare("INSERT INTO images VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $query->bind_param('', $id_user, $image_type, $updted_new_file, $image_size, $image_name, $datetime);
-    $query->execute();
-    $query->close();
+    $q = $mysqli->query("INSERT INTO images VALUES ('', $id_user, '$image_type', '$updted_new_file', '$image_size', '$image_name', '$datetime')");
     if ($q) {
         $r = "1";
     }
 }
-echo is_file($new_file);
+echo $r;
 logout();
 ?>
