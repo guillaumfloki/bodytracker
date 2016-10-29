@@ -36,10 +36,10 @@ chartApp.controller('LineController', function ($scope, measureService) {
 			angular.forEach(data[2], function (v) {
 				$scope.statsData.bmi.push(parseFloat(bmi.calculate(data[0][0], angular.element(v)[0].weight)));
 				$scope.statsData.weight.push(angular.element(v)[0].weight);
-				$scope.statsData.neck.push(angular.element(v)[0].weight);
-				$scope.statsData.waist.push(angular.element(v)[0].weight);
-				$scope.statsData.shoulders.push(angular.element(v)[0].weight);
-				$scope.statsData.chest.push(angular.element(v)[0].weight);
+				$scope.statsData.neck.push(angular.element(v)[0].neck);
+				$scope.statsData.waist.push(angular.element(v)[0].waist);
+				$scope.statsData.shoulders.push(angular.element(v)[0].shoulders);
+				$scope.statsData.chest.push(angular.element(v)[0].chest);
 				$scope.statsData.arms[0].push(angular.element(v)[0].arm_right);
 				$scope.statsData.arms[1].push(angular.element(v)[0].arm_left);
 				$scope.statsData.calves[0].push(angular.element(v)[0].calf_right);

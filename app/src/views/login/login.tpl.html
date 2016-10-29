@@ -1,59 +1,58 @@
 <div class="signin medium-12 columns" ng-init="initView()">
-	<div class="medium-6 columns col-centered">
-		<h1>Sign in</h1>
-		<div class="row">
-
-			<form novalidate ng-submit="signin(userLogin)">
-				<input autofocus type="text" ng-model="userLogin.username" placeholder="Username">
-				<input type="password" ng-model="userLogin.password" placeholder="Password">
-				<input type="reset" value="Cancel" ng-click="resetForm('userLogin')" class="button secondary">
-				<input type="submit" value="Sign in" class="button">
-			</form>
-		</div>
-	</div>
+    <div class="medium-6 columns col-centered">
+        <h1>Sign in</h1>
+        <div class="row">
+            <form novalidate ng-submit="signin(userLogin)" name="userForm">
+                <label for="" class="error" ng-show="errors.badCredentials">Bad credentials</label><input autofocus type="text" ng-model="userLogin.username" placeholder="Username" name="username">
+                <input type="password" ng-model="userLogin.password" placeholder="Password" name="password" ng-focus="clearFormErrors()">
+                <input type="reset" value="Cancel" ng-click="resetForm('userLogin')" class="button secondary" ng-focus="clearFormErrors()">
+                <input type="submit" value="Sign in" class="button">
+            </form>
+        </div>
+    </div>
 </div>
 <div class="signup" ng-show="defaultPanel == '2'">
-	<div class="medium-6 columns col-centered">
-		<h1 class="title">Sign up</h1>
-		<form novalidate ng-submit="signup(userForm)">
-			<div class="medium-6 columns">
-				<label for="">
-					<input type="text" ng-model="userForm.lastname" placeholder="Lastname">
-				</label>
-			</div>
-			<div class="medium-6 columns">
-				<label for="">
-					<input type="text" ng-model="userForm.firstname" placeholder="Firstname">
-				</label>
-			</div>
-			<label for="">
-				<input type="number" ng-model="userForm.age" placeholder="Age">
-			</label>
-			<div class="medium-6 columns">
-				<label for="">
-					<input type="radio" ng-model="userForm.gender" value="m" placeholder="Gender">Male</label>
-			</div>
-			<div class="medium-6 columns">
-				<label for="">
-					<input type="radio" ng-model="userForm.ender" value="m" placeholder="Gender">Female</label>
-			</div>
-			<label for="">
-				<input type="text" ng-model="userForm.username" placeholder="Username">
-			</label>
-			<label for="">
-				<input type="password" ng-model="userForm.pwd" placeholder="Password">
-			</label>
-			<label for="">
-				<input type="password" ng-model="userForm.pwd2" placeholder="Confirmation">
-			</label>
-			<label for="">
-				<input type="number" ng-model="userForm.height" placeholder="Height (cm)">
-			</label>
-			<label for="">
-				<input type="number" ng-model="userForm.weight" placeholder="Weight (kg)">
-			</label>
-			<input type="button" ng-click="resetForm('userForm')" value="Cancel" class="button secondary">
-			<input type="submit" value="Save" class="button">
-		</form>
-	</div>
+    <div class="medium-6 columns col-centered">
+        <h1 class="title">Sign up</h1>
+        <form novalidate ng-submit="signup(userForm)">
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="text" ng-model="userForm.lastname" placeholder="Lastname">
+                </label>
+            </div>
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="text" ng-model="userForm.firstname" placeholder="Firstname">
+                </label>
+            </div>
+            <label for="">
+                <input type="number" ng-model="userForm.age" placeholder="Age">
+            </label>
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="radio" ng-model="userForm.gender" value="m" placeholder="Gender">Male</label>
+            </div>
+            <div class="medium-6 columns">
+                <label for="">
+                    <input type="radio" ng-model="userForm.ender" value="m" placeholder="Gender">Female</label>
+            </div>
+            <label for="">
+                <input type="text" ng-model="userForm.username" placeholder="Username">
+            </label>
+            <label for="">
+                <input type="password" ng-model="userForm.pwd" placeholder="Password">
+            </label>
+            <label for="">
+                <input type="password" ng-model="userForm.pwd2" placeholder="Confirmation">
+            </label>
+            <label for="">
+                <input type="number" ng-model="userForm.height" placeholder="Height (cm)">
+            </label>
+            <label for="">
+                <input type="number" ng-model="userForm.weight" placeholder="Weight (kg)">
+            </label>
+            <input type="button" ng-click="resetForm('userForm')" value="Cancel" class="button secondary">
+            <input type="submit" value="Save" class="button">
+        </form>
+    </div>
 </div>

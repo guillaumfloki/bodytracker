@@ -6,7 +6,7 @@ $username = $request->username;
 $password = $request->password;
 $hash = newPassword($password);
 $res = $mysqli->query("SELECT id FROM user WHERE username = '$username' AND password = '$hash'");
-$a = null;
+$a = '0';
 if (mysqli_num_rows($res) > 0) {
     mysqli_free_result($res);
     $t = time();
