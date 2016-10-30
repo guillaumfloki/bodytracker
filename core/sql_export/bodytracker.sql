@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 17 Octobre 2016 à 07:47
+-- Généré le :  Dim 30 Octobre 2016 à 20:11
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `body_measures` (
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`),
   KEY `id_image` (`id_image`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Vider la table avant d'insérer `body_measures`
@@ -61,7 +61,8 @@ TRUNCATE TABLE `body_measures`;
 
 INSERT INTO `body_measures` (`id`, `id_user`, `date`, `weight`, `neck`, `chest`, `shoulders`, `arm_right`, `arm_left`, `calf_right`, `calf_left`, `thigh_right`, `thigh_left`, `waist`, `id_image`) VALUES
 (1, 3, 1476682798, 80, 40, 110, 55, 34, 34, 41, 41, 58, 58, 90, 0),
-(2, 1, 1476682798, 80, 40, 110, 55, 34, 34, 41, 41, 58, 58, 90, 0);
+(2, 1, 1476682798, 80, 40, 110, 55, 34, 34, 41, 41, 58, 58, 90, 0),
+(3, 3, 1477173600, 80, 41, 109, 55, 35, 35, 40, 41, 58, 58, 88, 0);
 
 -- --------------------------------------------------------
 
@@ -73,8 +74,11 @@ DROP TABLE IF EXISTS `images`;
 CREATE TABLE IF NOT EXISTS `images` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `id_user` int(10) DEFAULT NULL,
-  `url` text NOT NULL,
-  `date` int(20) NOT NULL,
+  `image_type` varchar(20) NOT NULL,
+  `image_uri` text NOT NULL,
+  `image_size` int(10) NOT NULL,
+  `image_name` text NOT NULL,
+  `date` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_user` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -119,7 +123,7 @@ TRUNCATE TABLE `user`;
 
 INSERT INTO `user` (`id`, `lastname`, `firstname`, `username`, `password`, `signup_date`, `age`, `gender`, `height`, `start_weight`, `target_weight`, `last_login`, `status`) VALUES
 (1, 'Wayne', 'Bruce', 'batman', '7d9b5c572750a18c533c07bbaf97bf014fa798fb7a7b5e0397d07750ed31d7dc', 0, 42, 'm', 198, 114, 100, 0, 'active'),
-(3, 'kent', 'clarke', 'superman', '81880b9160d9457b1430077203f4a47c2980e9d0757598f31d1ba7def1511914', 0, 39, 'm', 198, 104, 100, 1476682984, 'active');
+(3, 'kent', 'clarke', 'superman', '81880b9160d9457b1430077203f4a47c2980e9d0757598f31d1ba7def1511914', 0, 39, 'm', 198, 104, 100, 1477732274, 'active');
 
 --
 -- Contraintes pour les tables exportées
@@ -130,6 +134,12 @@ INSERT INTO `user` (`id`, `lastname`, `firstname`, `username`, `password`, `sign
 --
 ALTER TABLE `body_measures`
   ADD CONSTRAINT `body_measures_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `images`
+--
+ALTER TABLE `images`
+  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

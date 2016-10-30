@@ -1,13 +1,15 @@
 <?php
 /*TODO
  *
- * [] optimiser taille et poids de l'image
+ * [x] optimiser taille et poids de l'image
  *    avant enregistrement sur le serveur
- * [] exécuter ce script au sbmit du fomulaire
- * [] Ajouter une référence de la nouvelle id_image dans table body_measures
- *
+ * [] créer table temporaire où l'image est stockée
+ *      si formulaire soumis, image copiée dans table image et id_image copiée dans body_measures
+ *      si formulaire PAS soumis, ligne dans table temporaire détruite supprimée au bout de 10mn
+ * [] exécuter ce script au submit du fomulaire
  *
  * */
+
 $core_path = "../../engine/";
 include($core_path . "init.php");
 $image = $_FILES['measures_image'];
@@ -15,7 +17,6 @@ $id_user = addslashes($_POST['user']);
 $q = null;
 $dest_path = "../../../app/dist/images/";
 $new_file = '';
-$br = "<br>";
 //image data
 $imgData = file_get_contents($image['tmp_name']);
 $image_type = addslashes($image['type']);
@@ -25,32 +26,37 @@ $image_type = explode("/", $image_type);
 $image_type = $image_type[1];
 
 //select last id image
-$res_img = $mysqli->query("SELECT MAX(id) as last_id_img FROM images WHERE id_user='$id_user'");
+$res_img = $mysqli->query("SELECT MAX(images.id) as last_id_img, username FROM images, user WHERE id_user='$id_user' AND user.id = images.id_user");
 $arr_img = mysqli_fetch_assoc($res_img);
 mysqli_free_result($res_img);
-// create folders & paths
 $new_id_img = $arr_img['last_id_img'] + 1;
-$updted_path = $dest_path . $id_user . '/';
-if (!is_dir($updted_path)) {
-    mkdir($updted_path);
+// full size & thumbnail
+list($imageWidth, $imageHeight, $imageAttr) = getimagesize($image['tmp_name']);
+$updated_path = $dest_path . $id_user . '/' . $new_id_img . '/';
+// create folders & paths
+if (!is_dir($updated_path)) {
+    mkdir($updated_path, null, true);
 }
 
-$updted_path = $updted_path . $new_id_img . '/';
-if (!is_dir($updted_path)) {
-    mkdir($updted_path);
-}
+$datetime = datetime();
+$bid_date_arr = explode(' ', $datetime);
+$date_arr = explode('-', $bid_date_arr[0]);
+$date = $date_arr[0] . $date_arr[1] . $date_arr[2];
+$new_file = $id_user . '_' . $new_id_img . '_' . $date . "_" . sha1(random(6) . $arr_img['username'] . random(6)) . '.' . $image_type;
+$new_file_path = $updated_path . $new_file;
 
-$datetime = time();
-$new_file = $updted_path . $datetime . "." . $image_type;
-$updted_new_file = $updted_path.$datetime . "." . $image_type;
 // copy new image into newly created folder
-$copy = copy($image['tmp_name'], $new_file);
+copy($image['tmp_name'], $new_file_path);
+makeThumbnails($updated_path, $new_file, $new_id_img);
+
 $r = "0";
-if (@is_file($new_file)) {
-    $q = $mysqli->query("INSERT INTO images VALUES ('', $id_user, '$image_type', '$updted_new_file', '$image_size', '$image_name', '$datetime')");
-    if ($q) {
-        $r = "1";
-    }
+if (@is_file($new_file_path)) {
+    $q = "INSERT INTO `images` SET `id_user`=?, `image_type`=?, `image_uri`=?, `image_size`=?, `image_name`=?, `date`=? ";
+    $stmt = $mysqli->prepare($q);
+    $stmt->bind_param("ississ", $id_user, $image_type, $new_file_path, $image_size, $image_name, $datetime);
+    $stmt->execute();
+    $stmt->close();
+    $r = "1";
 }
 echo $r;
 logout();

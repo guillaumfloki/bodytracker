@@ -47,9 +47,9 @@ function debug($a)
 function getPassword($u)
 {
     $uid = stripslashes(trim($u));
-    $res = requete("SELECT password FROM user WHERE id = '$u' ");
-    $tab = fetch_assoc($res);
-    free_result($res);
+    $res = $mysqli->query("SELECT password FROM user WHERE id = '$uid' ");
+    $tab = mysqli_fetch_assoc($res);
+    mysqli_free_result($res);
     if (!empty($tab['password'])) {
         return $tab['password'];
     } else {
@@ -69,9 +69,9 @@ function setPassword($u, $p, $flag)
 {
     $uid = stripslashes(trim($u));
     $pass = stripslashes(trim($p));
-    $sha = newPassword($p);
+    $sha = newPassword($pass);
     if ($flag) {
-        query("UPDATE user SET password = '$sha' WHERE id = '$uid' ");
+        $mysqli->query("UPDATE user SET password = '$sha' WHERE id = '$uid' ");
     }
 }
 
@@ -115,6 +115,12 @@ function date2TS($date, $full = false)
         }
     }
     return $d;
+}
+
+// formate une date pour l'enregristrement datetime en bd mysql
+function datetime()
+{
+    return date("Y-m-d H:i:s");
 }
 
 //formatage lisible d'un timestamp (arg. opt. pour les heures, mn, etc.)
@@ -230,4 +236,55 @@ function tableFromSql($res)
     return $t;
 }
 
+function random($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890$!#?@')
+{
+    for ($s = '', $cl = strlen($c) - 1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i) ;
+    return $s;
+}
+function makeThumbnails($updir, $img, $id, $thumb_width = 200)
+{
+
+    $arr_image_details = getimagesize($updir . $img); // pass id to thumb name
+    $original_width = $arr_image_details[0];
+    $original_height = $arr_image_details[1];
+    $original_image_path = $updir . $img;
+    $thumbnail_dir = $updir . "thumbnail/";
+    if (!is_dir($thumbnail_dir)) {
+        mkdir($thumbnail_dir, null, true);
+    }
+    // thumbnails settings
+    $thumbnail_width = $thumb_width;
+    $thumbnail_height = ($original_height * 100) / $thumb_width;
+    $thumb_prefix = "thumb";
+
+    if ($original_width > $original_height) {
+        $new_width = $thumbnail_width;
+        $new_height = intval($original_height * $new_width / $original_width);
+    } else {
+        $new_height = $thumbnail_height;
+        $new_width = intval($original_width * $new_height / $original_height);
+    }
+    $dest_x = intval(($thumbnail_width - $new_width) / 2);
+    $dest_y = intval(($thumbnail_height - $new_height) / 2);
+    switch ($arr_image_details[2]) {
+        case 1:
+            $imgt = "ImageGIF";
+            $imgcreatefrom = "ImageCreateFromGIF";
+            break;
+        case 2:
+            $imgt = "ImageJPEG";
+            $imgcreatefrom = "ImageCreateFromJPEG";
+            break;
+        case 3:
+            $imgt = "ImagePNG";
+            $imgcreatefrom = "ImageCreateFromPNG";
+            break;
+    }
+    if ($imgt) {
+        $old_image = $imgcreatefrom($original_image_path);
+        $new_image = imagecreatetruecolor($thumbnail_width, $thumbnail_height);
+        imagecopyresized($new_image, $old_image, $dest_x, $dest_y, 0, 0, $new_width, $new_height, $original_width, $original_height);
+        $imgt($new_image, $thumbnail_dir . $thumb_prefix . '_' . $img);
+    }
+}
 ?>
