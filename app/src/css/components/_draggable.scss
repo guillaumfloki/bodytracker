@@ -1,11 +1,31 @@
-#dropbox {
+.c-dropbox {
   height: 20rem;
-  width:20rem;
-  border: .3rem dashed #b3b3b3;
-  line-height: 20rem;
-  text-align: center;
-  color: $silver;
+  background-color: #ecf0f1;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  &__inner {
+	height: 100%;
+	outline: .15rem dashed #bdc3c7;
+	background-color: mix(lighten(#bdc3c7, 8%), lighten(skyblue, 20%));
+	text-align: center;
+	font-size: 1.5rem;
+	color: darken(#bdc3c7, 5%);
+	transition: .2s;
+	outline-offset: -.1rem;
+	padding-top: 10%;
+	span {
+	  font-size: 4rem;
+	  margin-bottom: 1rem;
+	}
+  }
+  &__image-name {
+	margin-top: .8rem;
+  }
 }
-.image-name {
-  margin-top: .8rem;
+
+.c-dropbox--over {
+  .c-dropbox__inner {
+	background-color: #fff;
+	outline-offset: -.8rem;
+  }
 }

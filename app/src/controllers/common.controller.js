@@ -1,4 +1,4 @@
-angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", "$location", "$state", 'userService', function ($scope, $rootScope, $location, $state, userService) {
+angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", "$location", "$state", 'userService', '$route', function ($scope, $rootScope, $location, $state, userService, $route) {
     $scope.distPath = "../dist/";
     $scope.distCssPath = $scope.distPath + 'css/';
     $scope.distCssFilePath = $scope.distCssPath + "styles.css";
@@ -8,6 +8,7 @@ angular.module('btApp').controller('CommonController', ["$scope", "$rootScope", 
         localStorage.removeItem('currentUser');
         $location.url('/login');
     };
+    $scope.$route = $route;
     $scope.clearFormErrors = function() {
         for(var prop in $scope.errors){
             $scope.errors[prop] = false;

@@ -26,6 +26,7 @@
 	<script src="../components/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="../components/jquery/dist/jquery.min.js"></script>
 	<script src="../components/foundation/js/foundation.min.js"></script>
+	<script src="../components/foundation/js/foundation/foundation.offcanvas.js"></script>
 	<script src="../components/chart.js/dist/Chart.min.js"></script>
 	<script src="../components/angular-chart.js/dist/angular-chart.min.js"></script>
 	<script src="../components/moment/moment.js"></script>
@@ -35,22 +36,36 @@
 
 <body>
 <nav class="top-bar" data-topbar role="navigation">
+	<ul class="title-area">
+		<li class="name">
+			<h1><a href="#/" class="center">My Body Tracker</a></h1>
+		</li>
+		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	</ul>
 	<section class="top-bar-section">
 		<ul class="left">
-			<li ng-if="isAuthenticated()" ng-class="{'active': ($route.current.loadedTemplateUrl.indexOf('form'))}"><a
-					href="#!/form"><span class="fa fa-check-square-o"></span>&nbsp;Add measures</a></li>
-			<li ng-if="isAuthenticated()"><a href="#!/stats"><span class="fa fa-bar-chart"></span>&nbsp;Stats</a></li>
-			<li ng-if="isAuthenticated()"><a href="#!/gallery"><span class="fa fa-picture-o"></span>&nbsp;Gallery</a>
+			<li ng-if="isAuthenticated()" ng-class="{'active': ($route.current.activeTab == 'form')}"><a
+					href="#/form"><span class="fa fa-check-square-o"></span>&nbsp;Add measures</a></li>
+			<li ng-class="{'active': ($route.current.activeTab == 'stats')}" ng-if="isAuthenticated()"><a href="#/stats"><span
+					class="fa fa-bar-chart"></span>&nbsp;Stats</a></li>
+			<li ng-class="{'active': ($route.current.activeTab == 'gallery')}" ng-if="isAuthenticated()"><a href="#/gallery"><span
+					class="fa fa-picture-o"></span>&nbsp;Gallery</a>
 			</li>
 		</ul>
 		<ul class="right">
-			<li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('1')">Sign in</a></li>
-			<li ng-if="!isAuthenticated()"><a href="#!/login" ng-click="switchPanels('2')" class="warning">Sign up</a>
+			<li class="has-dropdown"><a href="#">Settings</a>
+				<ul class="dropdown">
+					<li ng-if="!isAuthenticated()"><a href="#/login" ng-click="switchPanels('1')">Sign in</a></li>
+					<li ng-if="!isAuthenticated()"><a href="#/login" ng-click="switchPanels('2')" class="warning">Sign
+						up</a>
+					</li>
+					<li ng-class="{'active': ($route.current.activeTab == 'profile')}" ng-if="isAuthenticated()"><a href="#/profile"><span
+							class="fa fa-user"></span>&nbsp;Profile</a>
+					</li>
+					<li ng-if="isAuthenticated()"><a ng-click="logout()"><span
+							class="fa fa-sign-out"></span>&nbsp;Log out</a></li>
+				</ul>
 			</li>
-			<li ng-if="isAuthenticated()" class="active"><a href="#!/profile"><span class="fa fa-user"></span>&nbsp;Profile</a>
-			</li>
-			<li ng-if="isAuthenticated()"><a ng-click="logout()" href=""><span class="fa fa-sign-out"></span>&nbsp;Log
-				out</a></li>
 		</ul>
 	</section>
 </nav>

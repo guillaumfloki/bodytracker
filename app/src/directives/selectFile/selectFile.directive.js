@@ -36,8 +36,8 @@
 							// insert file name
 							var p = document.createElement('p');
 							p.innerHTML = file.name;
-							p.classList.add('image-name');
-							target.next('.image-name').remove();
+							p.classList.add('c-dropbox__image-name');
+							target.next('.c-dropbox__image-name').remove();
 							target.after(p);
 
 							var reader = new FileReader();
@@ -67,6 +67,7 @@
 									//console.log(data.responseText);
 								}
 							});
+							if(element.hasClass("c-dropbox--over")) element.removeClass("c-dropbox--over");
 						}
 					}
 				} //end of handleFiles() fn
@@ -78,8 +79,13 @@
 				function dragover(e) {
 					e.stopPropagation();
 					e.preventDefault();
+					element.addClass("c-dropbox--over");
 				}
-
+				function dragleave(e) {
+					e.stopPropagation();
+					e.preventDefault();
+					if(element.hasClass("c-dropbox--over")) element.removeClass("c-dropbox--over");
+				}
 				function drop(e) {
 					e.stopPropagation();
 					e.preventDefault();
@@ -91,6 +97,7 @@
 				element
 					.bind('dragenter', dragenter)
 					.bind('dragover', dragover)
+					.bind('dragleave', dragleave)
 					.bind('drop', drop);
 			}
 		}
