@@ -105,14 +105,19 @@ function date2TS($date, $full = false)
 {
     $d = '';
     if ($date != '' && $date != '0000/00/00') {
-        $e = explode("/", $date);
+        $char = substr($date, 4, 1);
+        $e = explode(' ', $date);
+        $full_date = explode($char, $e[0]);
+        $h = 0;
+        $mn = 0;
+        $s = 0;
         if (isset($full) && $full == true) {
             $t = explode(":", $e[1]);
-            $time = $t[0] . "," . $t[1] . "," . $t[2];
-            $d = mktime($time, $e[1], $e[0], $e[2]);
-        } else {
-            $d = mktime(0, 0, 0, $e[1], $e[0], $e[2]);
+            $h = $t[0];
+            $mn = $t[1];
+            $s = $t[2];
         }
+        $d = mktime($h, $mn, $s, $full_date[1], $full_date[2], $full_date[0]);
     }
     return $d;
 }
@@ -241,6 +246,7 @@ function random($l, $c = 'abcdefghijklmnopqrstuvwxyz1234567890$!#?@')
     for ($s = '', $cl = strlen($c) - 1, $i = 0; $i < $l; $s .= $c[mt_rand(0, $cl)], ++$i) ;
     return $s;
 }
+
 function makeThumbnails($updir, $img, $id, $thumb_width = 200)
 {
 
@@ -287,4 +293,5 @@ function makeThumbnails($updir, $img, $id, $thumb_width = 200)
         $imgt($new_image, $thumbnail_dir . $thumb_prefix . '_' . $img);
     }
 }
+
 ?>

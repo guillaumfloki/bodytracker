@@ -1,0 +1,11 @@
+<div ng-init="retrieveGallery(currentUser.id)" ng-controller="LineController">
+	<div class="small-12 large-4 large-3 columns">
+		<h2>Gallery</h2>
+		<ul class="small-block-grid-3">
+			<li ng-repeat="picture in gallery track by picture.id">
+				<img ng-src="{{picture.image_uri}}" alt="{{picture.image_name}}">
+				<figcaption>{{picture.date | date:'dd/MM/yyyy'}}</figcaption>
+			</li>
+		</ul>
+	</div>
+</div>

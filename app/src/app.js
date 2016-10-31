@@ -8,6 +8,7 @@ var app = angular.module('btApp', [
 	'btApp.stats',
 	'btApp.login',
 	'btApp.profile',
+	'btApp.gallery',
 	'btApp.version',
 	'btApp.charts',
 ]);
@@ -30,6 +31,10 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
 		.when('/profile', {
 			templateUrl: 'views/profile/profile.tpl.html',
 			controller: 'profileController'
+		})
+		.when('/gallery', {
+			templateUrl: 'views/gallery/gallery.tpl.html',
+			controller: 'galleryController'
 		})
 		.otherwise({redirectTo: '/login'});
 

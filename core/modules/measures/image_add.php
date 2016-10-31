@@ -3,10 +3,9 @@
  *
  * [x] optimiser taille et poids de l'image
  *    avant enregistrement sur le serveur
- * [] créer table temporaire où l'image est stockée
+ * [x] créer table temporaire où l'image est stockée
  *      si formulaire soumis, image copiée dans table image et id_image copiée dans body_measures
  *      si formulaire PAS soumis, ligne dans table temporaire détruite supprimée au bout de 10mn
- * [] exécuter ce script au submit du fomulaire
  *
  * */
 
@@ -44,18 +43,21 @@ $date_arr = explode('-', $bid_date_arr[0]);
 $date = $date_arr[0] . $date_arr[1] . $date_arr[2];
 $new_file = $id_user . '_' . $new_id_img . '_' . $date . "_" . sha1(random(6) . $arr_img['username'] . random(6)) . '.' . $image_type;
 $new_file_path = $updated_path . $new_file;
-
+$image_active = 1;
 // copy new image into newly created folder
 copy($image['tmp_name'], $new_file_path);
 makeThumbnails($updated_path, $new_file, $new_id_img);
-
+$thumbnail_path = $updated_path . 'thumbnail/thumb_' . $new_file;
 $r = "0";
 if (@is_file($new_file_path)) {
-    $q = "INSERT INTO `images` SET `id_user`=?, `image_type`=?, `image_uri`=?, `image_size`=?, `image_name`=?, `date`=? ";
+    // insert in db
+    $q = "INSERT INTO `tmp_images` SET `id_user`=?, `image_type`=?, `image_uri`=?, `image_thumb_uri`=?,  `image_size`=?, `image_name`=?, `date`=?, `active`=? ";
     $stmt = $mysqli->prepare($q);
-    $stmt->bind_param("ississ", $id_user, $image_type, $new_file_path, $image_size, $image_name, $datetime);
+    $stmt->bind_param("isssissi", $id_user, $image_type, $new_file_path, $thumbnail_path, $image_size, $image_name, $datetime, $image_active);
     $stmt->execute();
+    $id_image = $mysqli->insert_id;
     $stmt->close();
+
     $r = "1";
 }
 echo $r;
